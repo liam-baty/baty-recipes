@@ -23,7 +23,9 @@ export const DEFAULTS = {
     textSize: 'normal',   // small | normal | large | xl
     defaultScale: 1,
     staples: 'grey',      // grey | hide  (how pantry staples show on the shopping list)
-    mainsOnly: true       // "What's for dinner?" limited to Savoury Mains
+    mainsOnly: true,      // "What's for dinner?" limited to Savoury Mains
+    reminders: false,     // show "Send to Reminders" buttons (after setting up the Shortcut)
+    remindersShortcut: 'Baty Reminders' // name of that Shortcut on the phone
   },
   edits: {},             // { recipeId: { ...changed fields } }  your edits to book recipes
   custom: {},            // { recipeId: { ...full recipe } }      recipes you added

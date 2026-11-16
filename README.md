@@ -83,6 +83,16 @@ To mark a recipe for checking, set `"needsCheck": true`. It then shows a "check 
 
 `index.html` has a `noindex` tag, which tells search engines not to list the site. `robots.txt` asks them not to crawl it. Search engines only read `robots.txt` from the top level of a domain. For a site at `yourname.github.io/baty-recipes/`, the `noindex` tag is what actually does the work. Either way, **the site and the GitHub repository are public to anyone who has or guesses the link.** Don't put anything private in it.
 
+## Shared Reminders (sharing between phones)
+
+The app's data doesn't sync between phones. To shop together, the app can send items to a **shared Reminders list**, which iCloud syncs to everyone it's shared with. iPhone doesn't let web apps add reminders directly, so the app passes the items to an Apple **Shortcut** (named "Baty Reminders" by default). The Shortcut adds one reminder per line. Set it up once: in the app, go to **Settings → Shared Reminders**, which has step-by-step instructions. Once it's switched on, these buttons appear:
+
+- **Shopping list → Send to shared Reminders.** Sends items that aren't ticked and aren't pantry staples, then offers to tick them off in the app.
+- **Recipe → All to Reminders**, or **Choose items → Ticked to Reminders.** Uses the current serving scale.
+- **Meal plan → Week's shopping to Reminders.** Merges the whole week's ingredients and leaves out pantry staples.
+
+The code is in `js/reminders.js`.
+
 ## iPhone notes
 
 - **Timers:** iPhone pauses web apps when the screen locks or you switch apps. Timers keep correct time and show the alert when you come back, but they can't beep while the app is in the background. Cook mode keeps the screen awake on recent iOS versions. Otherwise it suggests turning Auto-Lock off while cooking.

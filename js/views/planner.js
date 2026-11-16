@@ -6,6 +6,7 @@ import * as store from '../storage.js';
 import * as shop from '../shoplist.js';
 import { esc, toast, dialog, dialogForm, isoDate, fromIso, addDays, weekStart, fmtDate, uid, norm } from '../util.js';
 import { shareText, fmtK } from '../share.js';
+import * as reminders from '../reminders.js';
 import { LABELS, defaultLabel } from './recipe.js';
 
 export const name = 'plan';
@@ -36,6 +37,7 @@ export function render(el, { id }) {
 
       <div class="toolbar pad-x">
         <button class="btn primary" data-act="to-shop" ${entries.length ? '' : 'disabled'}>🛒 Add week to shopping list</button>
+        ${reminders.enabled() ? `<button class="btn" data-act="to-reminders" ${entries.length ? '' : 'disabled'}>☑︎ Week's shopping to Reminders</button>` : ''}
         <button class="btn" data-act="share" ${entries.length ? '' : 'disabled'}>⤴︎ Share week</button>
         <button class="btn ghost" data-act="copy-last">Copy last week</button>
       </div>
@@ -123,6 +125,15 @@ export function render(el, { id }) {
       toast(`Added ${added.length} items (pantry staples are greyed out on the list)`, {
         actionLabel: 'Undo', onAction: () => shop.removeUids(added)
       });
+      return;
+    } else if (act === 'to-reminders') {
+      // Merge the whole week's ingredients (at each recipe's scale), leave out pantry staples
+      const plan = store.get('plan');
+      const items = days().flatMap((d) => (plan[isoDate(d)] || []).flatMap((e) => {
+        const r = data.get(e.recipeId);
+        return r ? shop.itemsFor(r, shop.allLines(r), e.scale || 1) : [];
+      }));
+      reminders.send(shop.pendingLines(items).map((l) => l.text));
       return;
     } else if (act === 'share') {
       return shareText('Meal plan', weekText());

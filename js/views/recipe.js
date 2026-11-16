@@ -5,7 +5,8 @@ import * as data from '../data.js';
 import * as store from '../storage.js';
 import * as shop from '../shoplist.js';
 import { esc, toast, dialogForm, isoDate, fromIso, fmtDate, uid, addDays } from '../util.js';
-import { lineHtml } from '../ingredients.js';
+import { lineHtml, scaleLine } from '../ingredients.js';
+import * as reminders from '../reminders.js';
 import { withTimerButtons } from '../timers.js';
 import { recipeText, shareText, fmtK } from '../share.js';
 import { backLink } from './common.js';
@@ -101,10 +102,12 @@ export function render(el, { id }) {
         <div class="row gap no-print">
           ${picking
             ? `<button class="btn primary" data-act="add-picked">Add ${picked.size} ticked</button>
+               ${reminders.enabled() ? '<button class="btn" data-act="rem-picked">☑︎ Ticked to Reminders</button>' : ''}
                <button class="btn ghost" data-act="pick-all">Tick all</button>
                <button class="btn ghost" data-act="pick-cancel">Cancel</button>`
             : `<button class="btn primary" data-act="add-all">🛒 Add all to shopping list</button>
-               <button class="btn" data-act="pick">Choose items</button>`}
+               <button class="btn" data-act="pick">Choose items</button>
+               ${reminders.enabled() ? '<button class="btn" data-act="rem-all">☑︎ All to Reminders</button>' : ''}`}
         </div>
       </section>` : ''}
 
@@ -216,6 +219,18 @@ export function render(el, { id }) {
         const added = shop.addFromRecipe(r, [...picked].sort((a, b) => a - b).map((i) => lines[i]), k);
         picking = false;
         toast(`Added ${added.length} items`, { actionLabel: 'Undo', onAction: () => shop.removeUids(added) });
+        break;
+      }
+      case 'rem-all':
+        // Pantry staples are left out, and quantities are at the current scale
+        reminders.send(shop.pendingLines(shop.itemsFor(r, lines, k)).map((l) => l.text));
+        return;
+      case 'rem-picked': {
+        if (!picked.size) { toast('Tick the items you need first'); return; }
+        // Ticked items are sent even if they're pantry staples: you chose them
+        const chosen = [...picked].sort((a, b) => a - b).map((i) => lines[i]);
+        reminders.send(chosen.map((line) => scaleLine(line, k).text));
+        picking = false;
         break;
       }
       case 'plan': await addToPlan(r, k); return;

@@ -6,6 +6,8 @@ import * as store from '../storage.js';
 import { esc, toast, dialog, isStandalone, isoDate, fromIso, fmtDate } from '../util.js';
 import { applySettings, swVersion } from '../app.js';
 import { fmtK } from '../share.js';
+import * as reminders from '../reminders.js';
+import { DEFAULT_SHORTCUT } from '../reminders.js';
 
 export const name = 'settings';
 
@@ -50,6 +52,45 @@ export function render(el) {
           <button class="linkish" data-act="reset-sections">Reset</button></p>` : ''}
       </section>
 
+      <section class="pad-x card" id="reminders">
+        <h2>Shared Reminders</h2>
+        <p class="small">Send the shopping list, a recipe's ingredients or a week's shopping to a <strong>shared Reminders list</strong>.
+          Reminders syncs through iCloud, so everyone sharing the list sees the items and can tick them off.</p>
+        <label class="check"><input type="checkbox" name="reminders" ${s.reminders ? 'checked' : ''}> Show “Send to Reminders” buttons</label>
+        <label class="field">Shortcut name
+          <input type="text" name="remindersShortcut" value="${esc(s.remindersShortcut || DEFAULT_SHORTCUT)}" autocomplete="off" autocapitalize="words">
+        </label>
+        <p><button class="btn" data-act="test-reminders">Send a test item</button></p>
+        <details class="howto">
+          <summary><strong>How to set it up (once, about 5 minutes)</strong></summary>
+          <p class="small muted">iPhone doesn't let web apps add reminders themselves, so a small Shortcut does it for us.</p>
+          <h3>1. Make a shared list</h3>
+          <ol>
+            <li>Open the <strong>Reminders</strong> app and tap <strong>Add List</strong>. Call it e.g. <em>Shopping</em>, then tap <strong>Done</strong>.</li>
+            <li>Open the list, tap the <strong>Share</strong> button (person icon or ⋯ → Share List), and invite the people you shop with.</li>
+          </ol>
+          <h3>2. Make the Shortcut</h3>
+          <ol>
+            <li>Open the <strong>Shortcuts</strong> app and tap <strong>＋</strong> (top right).</li>
+            <li>Tap the name at the top → <strong>Rename</strong> → type <strong>${esc(s.remindersShortcut || DEFAULT_SHORTCUT)}</strong> exactly.</li>
+            <li>Tap <strong>Search Actions</strong>, find <strong>Split Text</strong> and tap it.</li>
+            <li>In that action, tap the blue <strong>Text</strong> and choose <strong>Shortcut Input</strong>. It should read <em>Split Shortcut Input by New Lines</em>.
+              (A “Receive … input” line may appear at the top — that's fine.)</li>
+            <li>Search for <strong>Repeat with Each</strong> and add it. It should read <em>Repeat with each item in Split Text</em>.</li>
+            <li>Search for <strong>Add New Reminder</strong> and add it. Drag it <strong>up</strong> so it sits between <em>Repeat with each</em> and <em>End Repeat</em>.</li>
+            <li>In <em>Add New Reminder</em>: tap the blue <strong>Reminder</strong> word and choose <strong>Repeat Item</strong>; tap the list name and choose your shared list.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+          <h3>3. Try it</h3>
+          <ol>
+            <li>Tick <strong>Show “Send to Reminders” buttons</strong> above, then tap <strong>Send a test item</strong>.</li>
+            <li>The Shortcuts app opens. The first time, tap <strong>Allow</strong> when it asks to use Reminders.</li>
+            <li>Check your shared list for “Baty Recipes test”, delete it, and swipe back to the app.</li>
+          </ol>
+          <p class="small muted">“Shortcut not found”? Check the name above matches the Shortcut's name exactly (capitals and spaces count).</p>
+        </details>
+      </section>
+
       <section class="pad-x card">
         <h2>Backup &amp; moving phones</h2>
         <div class="tip inline"><p><strong>Your data is saved on this phone only.</strong>
@@ -88,9 +129,15 @@ export function render(el) {
 
   el.addEventListener('change', (e) => {
     const t = e.target;
-    if (t.type === 'radio' || t.name === 'mainsOnly') {
+    if (t.name === 'remindersShortcut') {
+      store.update('settings', (s) => { s.remindersShortcut = t.value.trim() || DEFAULT_SHORTCUT; });
+      draw();
+      return;
+    }
+    if (t.type === 'radio' || t.name === 'mainsOnly' || t.name === 'reminders') {
       store.update('settings', (s) => {
         if (t.name === 'mainsOnly') s.mainsOnly = t.checked;
+        else if (t.name === 'reminders') s.reminders = t.checked;
         else if (t.name === 'defaultScale') s.defaultScale = Number(t.value);
         else s[t.name] = t.value;
       });
@@ -106,6 +153,9 @@ export function render(el) {
       store.update('pantry', (p) => p.filter((x) => x !== b.dataset.val));
     } else if (act === 'reset-sections') {
       store.set('sectionOverrides', {});
+    } else if (act === 'test-reminders') {
+      reminders.send(['Baty Recipes test']);
+      return;
     } else if (act === 'export') {
       return exportData();
     } else if (act === 'clear') {

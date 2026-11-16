@@ -370,6 +370,11 @@ body[data-view="cook"] .timer-tray { bottom: calc(var(--safe-b) + 92px); }
 .seg-opt input:checked + span { background: var(--purple); color: var(--on-accent); }
 .seg-opt input:focus-visible + span { outline: 3px solid var(--purple); outline-offset: -3px; }
 .staple-list { margin: 10px 0; }
+.howto { margin-top: 8px; }
+.howto summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--green); }
+.howto ol { padding-left: 1.3em; margin: 4px 0 8px; }
+.howto li { margin: 4px 0; }
+.howto h3 { margin-top: 12px; }
 .about { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
 .about dt { color: var(--muted); }
 .about dd { margin: 0; font-weight: 600; }

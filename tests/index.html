@@ -92,6 +92,20 @@
     const mixed = combine(items([['1 cup grated cheese', 1], ['100 g grated cheese', 1]]));
     check('cup + g kept apart', mixed.length, 2);
 
+    // ---------- Shared Reminders ----------
+    section('Shared Reminders');
+    const { urlFor } = await import('../js/reminders.js');
+    const shopMod = await import('../js/shoplist.js');
+    check('Shortcuts link', urlFor(['6 onions', '2 L milk'], 'Baty Reminders'),
+      'shortcuts://run-shortcut?name=Baty%20Reminders&input=text&text=6%20onions%0A2%20L%20milk');
+    check('nothing to send', urlFor(['  ', ''], 'Baty Reminders'), null);
+    const fakeRecipe = { id: 't', title: 'T' };
+    const pend = shopMod.pendingLines([
+      ...shopMod.itemsFor(fakeRecipe, ['1 onion, diced', 'Salt and pepper', '1 cup milk'], 2),
+      ...shopMod.itemsFor(fakeRecipe, ['2 onions'], 1)
+    ]).map((l) => l.text);
+    check('merged, scaled, staples left out', pend.sort(), ['2 cups milk', '4 onions']);
+
     // ---------- Timers ----------
     section('Timers found in the method');
     const d = (t) => findDurations(t).map((x) => [x.min, x.max]);

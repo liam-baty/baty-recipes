@@ -6,6 +6,7 @@ import * as shop from '../shoplist.js';
 import { esc, toast, dialog } from '../util.js';
 import { SECTIONS } from '../ingredients.js';
 import { shareText, copyText } from '../share.js';
+import * as reminders from '../reminders.js';
 
 export const name = 'shopping';
 
@@ -27,6 +28,7 @@ export function render(el) {
 
       ${count ? `
       <div class="toolbar pad-x">
+        ${reminders.enabled() ? '<button class="btn primary" data-act="reminders">☑︎ Send to shared Reminders</button>' : ''}
         <button class="btn" data-act="share">⤴︎ Send list</button>
         <button class="btn" data-act="copy">Copy list</button>
         <button class="btn ghost" data-act="sources" aria-pressed="${showSources}">${showSources ? 'Hide' : 'Show'} recipes</button>
@@ -49,6 +51,9 @@ export function render(el) {
           <ul class="shop-list">${staples.map((row) => rowHtml(row, showSources)).join('')}</ul>
         </section>` : ''}
       ${staples.length && mode === 'hide' ? `<p class="pad-x muted small">${staples.length} pantry staple${staples.length > 1 ? 's' : ''} hidden (change in Settings).</p>` : ''}
+
+      ${count && !reminders.enabled() ? `<p class="pad-x muted small">Shopping together? You can send this list to a shared Reminders list that syncs between phones —
+        <a href="#/settings">set it up in Settings</a>.</p>` : ''}
 
       ${count ? `
       <div class="toolbar pad-x end">
@@ -94,6 +99,18 @@ export function render(el) {
       toast('Moved — the app will remember this');
     } else if (act === 'sources') {
       showSources = !showSources;
+    } else if (act === 'reminders') {
+      const lines = shop.pendingLines();
+      if (!reminders.send(lines.map((l) => l.text))) return;
+      // Offer to tick off what was sent, so it isn't sent twice
+      const c = await dialog(`<h2>Sent ${lines.length} item${lines.length === 1 ? '' : 's'} to Reminders</h2>
+        <p>Tick them off here so they aren't sent again? (Pantry staples and ticked items weren't sent.)</p>
+        <div class="stack"><button class="btn primary" value="tick" autofocus>Tick them off here</button>
+        <button class="btn ghost" value="">Keep them as they are</button></div>`);
+      if (c === 'tick') {
+        const uids = new Set(lines.flatMap((l) => l.uids));
+        store.update('shopping', (list) => { list.forEach((i) => { if (uids.has(i.uid)) i.checked = true; }); });
+      }
     } else if (act === 'share') {
       return shareText('Shopping list', shop.asText());
     } else if (act === 'copy') {

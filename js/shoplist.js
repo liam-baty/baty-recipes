@@ -44,8 +44,7 @@ export function allLines(recipe) {
  * Lines with the same ingredient name are kept together; where units match they are
  * added up into one line, otherwise they are listed together.
  */
-export function build() {
-  const items = store.get('shopping');
+export function build(items = store.get('shopping')) {
   const overrides = store.get('sectionOverrides');
   const staples = store.get('pantry');
 
@@ -75,6 +74,24 @@ export function build() {
   const out = Object.values(sections).filter((s) => s.rows.length);
   for (const s of out) s.rows.sort((a, b) => a.checked - b.checked || a.name.localeCompare(b.name));
   return { sections: out, staples: stapleRows, count: items.length };
+}
+
+/**
+ * Shopping lines that still need buying (not ticked, not pantry staples), in
+ * supermarket-section order: [{ text, uids }]. Used for Reminders.
+ * Pass items to work on a list that isn't saved (e.g. one recipe or one week).
+ */
+export function pendingLines(items = store.get('shopping')) {
+  const { sections } = build(items);
+  return sections.flatMap((s) => s.rows.filter((r) => !r.checked).flatMap((r) =>
+    r.lines.map((l) => ({ text: l.text, uids: l.members.map((m) => m.uid) }))));
+}
+
+/** Unsaved list items for a recipe, in the same shape as saved ones. */
+export function itemsFor(recipe, lines, scale = 1) {
+  return lines.filter((line) => nameOf(line)).map((line) => ({
+    uid: uid(), line, scale, recipeId: recipe.id, recipeTitle: recipe.title, checked: false
+  }));
 }
 
 /** Plain text for sharing (ticked and staple items left off). */
