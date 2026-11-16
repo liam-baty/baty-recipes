@@ -1,0 +1,26 @@
+/* Clean single-recipe print layout (loaded only when printing). */
+@page { margin: 15mm; }
+:root { font-size: 11pt; }
+body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+.tabbar, .timer-tray, .toast, .alarm, .no-print, .skip, .scaler, .top, .tip, dialog { display: none !important; }
+.print-only { display: block !important; }
+main { max-width: none; }
+.pad-x { padding-left: 0; padding-right: 0; }
+h1 { font-size: 20pt; margin: 0 0 4pt; }
+h2 { font-size: 13pt; margin: 12pt 0 4pt; color: #000; border-bottom: 1px solid #999; }
+h3 { color: #000; }
+.recipe-head .eyebrow, .source { color: #444; }
+.intro p { background: none; border-left: 2px solid #999; padding: 0 0 0 8pt; }
+.ingredients { columns: 2; column-gap: 24pt; }
+.ingredients h2, .ingredients .scale-note { column-span: all; }
+.ing-list li { border: 0; padding: 1pt 0 1pt 12pt; break-inside: avoid; }
+.ing-list li.unscaled { text-decoration: none; }
+.steps li { border: 0; padding: 3pt 0 3pt 26pt; break-inside: avoid; }
+.steps li::before { background: none; color: #000; border: 1px solid #000; width: 18pt; height: 18pt; top: 3pt; }
+.timer-chip { border: 0; background: none; padding: 0; font-weight: normal; min-height: 0; margin: 0; }
+.notes p { border-left: 2px solid #999; }
+a { color: #000; text-decoration: none; }
+table { font-size: 9pt; }
+th, td { border-color: #999; }
+thead th { background: #eee; }
+.hint { color: #444; }

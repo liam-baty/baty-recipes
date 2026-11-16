@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Baty Recipes icon: an original kookaburra in a chef's hat, layered green and purple. -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#6a42a3"/>
+      <stop offset="1" stop-color="#2c1548"/>
+    </radialGradient>
+    <radialGradient id="disc" cx="45%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#4f9e6e"/>
+      <stop offset="1" stop-color="#1f5a3c"/>
+    </radialGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3f8a5c"/>
+      <stop offset="1" stop-color="#1b4a32"/>
+    </linearGradient>
+    <linearGradient id="head" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbf4e6"/>
+      <stop offset="1" stop-color="#eadcc4"/>
+    </linearGradient>
+    <linearGradient id="hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e9e2f2"/>
+    </linearGradient>
+    <linearGradient id="tail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7d55b8"/>
+      <stop offset="1" stop-color="#3f2366"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: purple background (fills the square so iPhone can round the corners) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Layer 2: gum leaves around the edge -->
+  <g opacity="0.9">
+    <g fill="#8a63c4">
+      <path d="M44 120 C70 70 130 52 170 60 C140 90 96 120 44 120Z"/>
+      <path d="M470 380 C450 432 396 462 350 462 C378 428 420 396 470 380Z"/>
+      <path d="M60 400 C52 440 70 480 104 492 C108 456 92 424 60 400Z"/>
+    </g>
+    <g fill="#5fae7d">
+      <path d="M468 118 C440 70 384 52 342 58 C372 92 416 118 468 118Z"/>
+      <path d="M40 300 C30 250 50 210 84 196 C88 236 72 274 40 300Z"/>
+      <path d="M440 470 C476 450 492 410 484 370 C456 396 440 430 440 470Z"/>
+    </g>
+    <g fill="none" stroke="#2c1548" stroke-width="3" opacity="0.5">
+      <path d="M44 120 C96 104 136 80 170 60"/>
+      <path d="M468 118 C416 104 376 80 342 58"/>
+      <path d="M470 380 C420 400 380 430 350 462"/>
+    </g>
+  </g>
+
+  <!-- Layer 3: green disc with lighter rings -->
+  <circle cx="256" cy="262" r="196" fill="#1b4a32"/>
+  <circle cx="256" cy="262" r="186" fill="url(#disc)"/>
+  <circle cx="256" cy="262" r="186" fill="none" stroke="#b79be0" stroke-width="6" opacity="0.9"/>
+  <circle cx="256" cy="262" r="168" fill="none" stroke="#7cc69b" stroke-width="2" stroke-dasharray="4 10" opacity="0.7"/>
+
+  <!-- Layer 4: branch -->
+  <path d="M96 420 C180 404 330 410 430 396" fill="none" stroke="#2c1548" stroke-width="20" stroke-linecap="round"/>
+  <path d="M96 420 C180 404 330 410 430 396" fill="none" stroke="#5b3a8c" stroke-width="10" stroke-linecap="round"/>
+  <path d="M380 402 C396 380 410 372 428 370" fill="none" stroke="#2c1548" stroke-width="9" stroke-linecap="round"/>
+  <ellipse cx="434" cy="366" rx="16" ry="8" fill="#7cc69b" transform="rotate(-25 434 366)"/>
+
+  <!-- Layer 5: the kookaburra -->
+  <g>
+    <!-- tail feathers, layered purple with bars -->
+    <path d="M330 330 C372 360 404 400 420 452 C392 446 356 418 318 372Z" fill="url(#tail)"/>
+    <path d="M318 344 C352 372 376 404 388 446 C366 438 338 410 306 380Z" fill="#5b3a8c"/>
+    <g stroke="#2c1548" stroke-width="5" stroke-linecap="round" opacity="0.7">
+      <path d="M344 362 L360 352"/><path d="M360 384 L378 374"/><path d="M374 406 L392 398"/><path d="M386 428 L404 422"/>
+    </g>
+
+    <!-- body -->
+    <ellipse cx="282" cy="330" rx="92" ry="98" fill="#e9dcc3" transform="rotate(-18 282 330)"/>
+    <!-- chest feather scallops -->
+    <g fill="none" stroke="#c9b28c" stroke-width="3" opacity="0.8">
+      <path d="M220 330 q10 8 20 0 q10 8 20 0"/>
+      <path d="M216 356 q10 8 20 0 q10 8 20 0 q10 8 20 0"/>
+      <path d="M224 382 q10 8 20 0 q10 8 20 0 q10 8 20 0"/>
+      <path d="M240 406 q10 8 20 0 q10 8 20 0"/>
+    </g>
+
+    <!-- wing: three layers of green feathers with purple tips -->
+    <path d="M276 262 C340 250 382 290 384 348 C384 392 356 418 318 420 C300 380 280 320 276 262Z" fill="url(#wing)"/>
+    <path d="M296 300 C340 300 366 330 368 366 C368 394 350 410 326 412 C314 380 300 340 296 300Z" fill="#2f6b4f"/>
+    <g fill="#b79be0">
+      <path d="M318 412 q8 14 18 0z"/><path d="M336 410 q8 14 18 -2z"/><path d="M352 402 q10 12 16 -6z"/>
+    </g>
+    <g fill="none" stroke="#7cc69b" stroke-width="3" opacity="0.9">
+      <path d="M300 286 q16 -6 30 2"/>
+      <path d="M306 318 q18 -6 34 4"/>
+      <path d="M314 350 q18 -4 32 6"/>
+      <path d="M322 380 q14 -2 26 8"/>
+    </g>
+    <!-- light blue-ish wing flash, done in mint to stay on palette -->
+    <path d="M286 272 C306 266 322 270 332 280 C316 284 300 284 286 272Z" fill="#a8e0bd"/>
+
+    <!-- feet on the branch -->
+    <g fill="none" stroke="#e7c38f" stroke-width="7" stroke-linecap="round">
+      <path d="M256 404 L250 418"/><path d="M286 408 L284 420"/>
+    </g>
+
+    <!-- head -->
+    <circle cx="232" cy="228" r="84" fill="url(#head)"/>
+    <!-- crown: layered purple and green streaks -->
+    <path d="M168 196 C186 150 250 132 298 160 C312 172 316 190 314 210 C290 186 236 176 168 196Z" fill="#5b3a8c"/>
+    <path d="M180 192 C204 166 252 158 290 176 C262 172 222 176 180 192Z" fill="#8a63c4"/>
+    <g stroke="#3f8a5c" stroke-width="3" stroke-linecap="round">
+      <path d="M210 176 L222 168"/><path d="M236 170 L250 164"/><path d="M262 170 L276 166"/>
+    </g>
+    <!-- eye stripe -->
+    <path d="M168 230 C200 214 260 216 312 232 C300 244 262 244 230 240 C206 238 186 240 168 238Z" fill="#3f2366"/>
+    <!-- eye -->
+    <circle cx="218" cy="226" r="17" fill="#fffaf0"/>
+    <circle cx="214" cy="226" r="10" fill="#1b0f2a"/>
+    <circle cx="210" cy="221" r="3.5" fill="#ffffff"/>
+    <!-- cheek -->
+    <ellipse cx="256" cy="268" rx="22" ry="12" fill="#d8c5a6" opacity="0.6"/>
+
+    <!-- big beak: dark top, pale bottom -->
+    <path d="M168 230 C130 226 92 236 58 258 C100 258 140 256 176 252Z" fill="#2c1548"/>
+    <path d="M176 252 C140 256 100 258 58 258 C96 274 140 280 182 270Z" fill="#cfc2ae"/>
+    <path d="M58 258 C100 260 140 258 178 254" fill="none" stroke="#1b0f2a" stroke-width="2.5"/>
+    <path d="M92 244 C118 238 142 236 164 236" fill="none" stroke="#6a42a3" stroke-width="2" opacity="0.8"/>
+
+    <!-- chef's hat: band + three puffs, tilted -->
+    <g transform="rotate(-10 236 138)">
+      <ellipse cx="236" cy="150" rx="70" ry="16" fill="#1b0f2a" opacity="0.18"/>
+      <circle cx="190" cy="98" r="40" fill="url(#hat)"/>
+      <circle cx="282" cy="98" r="40" fill="url(#hat)"/>
+      <circle cx="236" cy="78" r="50" fill="url(#hat)"/>
+      <rect x="180" y="96" width="112" height="40" fill="url(#hat)"/>
+      <!-- folds -->
+      <g fill="none" stroke="#c9bcdc" stroke-width="3" stroke-linecap="round">
+        <path d="M214 74 C212 92 214 108 218 128"/>
+        <path d="M258 74 C262 92 260 108 256 128"/>
+        <path d="M186 86 C196 80 206 80 214 86"/>
+      </g>
+      <!-- band in green with purple stitching -->
+      <rect x="176" y="124" width="120" height="26" rx="6" fill="#2f6b4f"/>
+      <rect x="176" y="124" width="120" height="7" rx="3" fill="#4f9e6e"/>
+      <path d="M184 140 H288" stroke="#b79be0" stroke-width="3" stroke-dasharray="6 6"/>
+    </g>
+  </g>
+</svg>

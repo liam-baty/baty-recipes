@@ -1,0 +1,5 @@
+# Local tool settings (not part of the website)
+.claude/
+# Windows/macOS clutter
+Thumbs.db
+.DS_Store

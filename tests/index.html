@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Baty Recipes – checks</title>
+  <style>
+    body { font: 15px/1.5 -apple-system, Segoe UI, sans-serif; margin: 16px; background: #faf7f2; color: #1f1a24; }
+    h1 { font-size: 1.4rem; } h2 { font-size: 1.1rem; margin-top: 1.5em; }
+    .pass { color: #2f6b4f; } .fail { color: #b3261e; font-weight: 700; }
+    code { background: #eee; padding: 0 4px; border-radius: 4px; }
+    #summary { font-size: 1.2rem; font-weight: 700; padding: 10px; border-radius: 10px; background: #e3efe7; }
+    #summary.bad { background: #fde2e0; }
+  </style>
+</head>
+<body>
+  <h1>Baty Recipes – automatic checks</h1>
+  <p>Open this page (tests/index.html) on the same site as the app. It checks the recipe data, scaling, search and shopping-list merging. Nothing here changes your saved data.</p>
+  <p id="summary">Running…</p>
+  <div id="out"></div>
+
+  <script type="module">
+    import { parseLine, scaleLine, combine, sectionFor, isStaple, nameOf } from '../js/ingredients.js';
+    import { findDurations } from '../js/timers.js';
+    import * as data from '../js/data.js';
+
+    const out = document.getElementById('out');
+    let pass = 0, fail = 0;
+    const section = (t) => out.insertAdjacentHTML('beforeend', `<h2>${t}</h2>`);
+    function check(label, actual, expected) {
+      const ok = JSON.stringify(actual) === JSON.stringify(expected);
+      ok ? pass++ : fail++;
+      out.insertAdjacentHTML('beforeend', `<div class="${ok ? 'pass' : 'fail'}">${ok ? '✓' : '✗'} ${label}` +
+        (ok ? '' : ` — got <code>${JSON.stringify(actual)}</code>, expected <code>${JSON.stringify(expected)}</code>`) + '</div>');
+    }
+
+    // ---------- Scaling tricky lines ----------
+    section('Scaling');
+    const s = (line, k) => scaleLine(line, k).text;
+    check('fraction ×2', s('1/4 cup Tikka Masala curry paste', 2), '½ cup Tikka Masala curry paste');
+    check('mixed number ×2', s('1 1/2 cups milk', 2), '3 cups milk');
+    check('mixed number ×½', s('1 1/2 cups milk', 0.5), '¾ cup milk');
+    check('thirds ×½ rounds to nearest kitchen fraction', s('1/3 cup water', 0.5), '⅛ cup water');
+    check('range ×2', s('2–3 garlic cloves', 2), '4–6 garlic cloves');
+    check('can ×2', s('400 g can chickpeas, drained and rinsed', 2), '2 × 400 g cans chickpeas, drained and rinsed');
+    check('can ×1 keeps original', s('400 g can chickpeas, drained and rinsed', 1), '400 g can chickpeas, drained and rinsed');
+    check('grams ×3 → kg', s('500 g meatballs (beef, chicken, lamb or pork)', 3), '1.5 kg meatballs (beef, chicken, lamb or pork)');
+    check('ml ×½', s('200 ml coconut milk', 0.5), '100 ml coconut milk');
+    check('pinch ×2', s('1 pinch fresh curly parsley', 2), '2 pinches fresh curly parsley');
+    check('"Pinch salt" left unchanged', scaleLine('Pinch white pepper', 2), { text: 'Pinch white pepper', note: '', scaled: false });
+    check('"Salt and pepper" unchanged', scaleLine('Salt and pepper', 3).scaled, false);
+    check('"About" kept', s('About 1 cup milk', 2), 'About 2 cups milk');
+    check('bracket metric scaled', s('4 cups (1 L) chicken stock', 0.5), '2 cups (500 ml) chicken stock');
+    check('bracket with words', s('240 g bread flour (215 g if using tangzhong)', 2), '480 g bread flour (430 g if using tangzhong)');
+    check('[double] note kept apart', scaleLine('1 Tbsp sugar [double: 2 Tbsp]', 3), { text: '3 Tbsp sugar', note: 'double: 2 Tbsp', scaled: true });
+    check('eggs ×1.5', s('2 eggs, room temperature', 1.5), '3 eggs, room temperature');
+    check('tsp ×3', s('1/2 tsp salt', 3), '1 ½ tsp salt');
+    check('"large" not read as litres', parseLine('1 large egg').unit, null);
+    check('"g" not read from "garlic"', parseLine('3 garlic cloves').unit !== 'g', true);
+
+    // ---------- Names, sections, staples ----------
+    section('Names, supermarket sections and pantry staples');
+    check('name: onion', nameOf('onions, finely chopped'), 'onion');
+    check('name: chickpea', parseLine('400 g can chickpeas, drained').name, 'chickpea');
+    const sec = (l) => sectionFor(parseLine(l));
+    check('onion → produce', sec('1 onion, thinly sliced'), 'produce');
+    check('chicken thigh → meat', sec('500 g chicken thighs'), 'meat');
+    check('coconut milk → pantry', sec('200 ml coconut milk'), 'pantry');
+    check('soy sauce → spices & sauces', sec('1/4 cup soy sauce'), 'spices');
+    check('can of tomatoes → pantry', sec('400 g can diced tomatoes'), 'pantry');
+    check('eggs → dairy', sec('2 eggs'), 'dairy');
+    check('frozen peas → frozen', sec('1 cup frozen peas'), 'frozen');
+    check('grated cheese → dairy', sec('1 cup grated cheese'), 'dairy');
+    const staples = ['salt', 'pepper', 'black pepper', 'olive oil', 'soy sauce'];
+    check('"Salt and pepper" is a staple', isStaple(parseLine('Salt and pepper, to taste'), staples), true);
+    check('"Freshly ground black pepper" is a staple', isStaple(parseLine('Freshly ground black pepper'), staples), true);
+    check('"garlic salt" is not', isStaple(parseLine('Garlic salt'), staples), false);
+
+    // ---------- Merging ----------
+    section('Shopping list merging');
+    const items = (arr) => arr.map(([line, scale]) => ({ parsed: parseLine(line), scale, recipeTitle: 'x' }));
+    check('onions merge', combine(items([['1 onion, thinly sliced', 1], ['2 onions, diced', 1]])).map((x) => x.text), ['3 onions']);
+    check('g + kg merge', combine(items([['500 g beef mince', 1], ['1 kg beef mince', 1]])).map((x) => x.text), ['1.5 kg beef mince']);
+    check('scaled merge', combine(items([['1 cup milk', 2], ['1/2 cup milk', 1]])).map((x) => x.text), ['2 ½ cups milk']);
+    check('cans merge', combine(items([['400 g can chickpeas', 1], ['400 g can chickpeas, drained', 2]])).map((x) => x.text), ['3 × 400 g cans chickpeas']);
+    check('garlic cloves merge both wordings', combine(items([['8 cloves garlic', 1], ['2 garlic cloves, minced', 1]])).map((x) => x.text), ['10 cloves garlic']);
+    check('celery sticks merge', combine(items([['2 sticks celery', 1], ['1 celery stick, finely chopped', 1]])).map((x) => x.text), ['3 sticks celery']);
+    check('minced beef + beef mince', parseLine('500 g minced beef').name, parseLine('750 g beef mince').name);
+    check('red peppers → produce', sectionFor(parseLine('2 red peppers')), 'produce');
+    check('dried thyme → spices', sectionFor(parseLine('1 tsp dried thyme')), 'spices');
+    const mixed = combine(items([['1 cup grated cheese', 1], ['100 g grated cheese', 1]]));
+    check('cup + g kept apart', mixed.length, 2);
+
+    // ---------- Timers ----------
+    section('Timers found in the method');
+    const d = (t) => findDurations(t).map((x) => [x.min, x.max]);
+    check('10 minutes', d('Simmer for 10 minutes.'), [[600, null]]);
+    check('1–2 minutes', d('Cook 1–2 minutes'), [[60, 120]]);
+    check('2 hours', d('Leave for 2 hours'), [[7200, null]]);
+    check('30 sec', d('Microwave 30 sec'), [[30, null]]);
+    check('several', d('Bake 20 minutes, then rest 5 minutes'), [[1200, null], [300, null]]);
+
+    // ---------- Recipe data ----------
+    section('Recipe data');
+    await data.load('../recipes.json');
+    const all = data.all().filter((r) => !r.custom);
+    check('135 recipes loaded', all.length, 135);
+    check('4 parts', data.parts().length, 4);
+    const groups = data.allGroups().map((g) => g.group);
+    check('every recipe is in a listed group', all.filter((r) => !groups.includes(r.group)).map((r) => r.id), []);
+    check('every group has recipes', groups.filter((g) => !data.byGroup(g).length), []);
+    check('ids are unique', new Set(all.map((r) => r.id)).size, all.length);
+    check('related links all exist', all.flatMap((r) => (r.related || []).filter((id) => !data.get(id))), []);
+    const counts = data.allGroups().map((g) => `${g.group}: ${data.byGroup(g.group).length}`);
+    out.insertAdjacentHTML('beforeend', `<details><summary>Recipes per group</summary><ul>${counts.map((c) => `<li>${c}</li>`).join('')}</ul></details>`);
+    const unparsed = all.flatMap((r) => r.ingredients.flatMap((g) => g.items)).filter((l) => !parseLine(l).parsed);
+    out.insertAdjacentHTML('beforeend', `<p>${unparsed.length} of ${all.reduce((n, r) => n + r.ingredients.reduce((m, g) => m + g.items.length, 0), 0)} ingredient lines have no leading quantity (shown unchanged when scaling).</p>`);
+
+    // ---------- Search ----------
+    section('Search and "What can I make"');
+    const titles = (list) => list.slice(0, 3).map((r) => r.id);
+    check('"hedge" finds Hedgehog Slice first', data.search('hedge')[0]?.id, 'hedgehog-slice');
+    check('"BUTTER chick" (case, partial)', data.search('BUTTER chick').some((r) => r.id === 'butter-chicken-quick'), true);
+    check('search by ingredient "chickpea"', data.search('chickpea').some((r) => r.id === 'easy-tikka-meatball-curry'), true);
+    check('search by group "muffin"', data.search('muffin').length >= 10, true);
+    check('"puree" matches "purée"', data.search('tomato puree').length > 0, true);
+    const mk = data.makeWith(['chicken', 'rice']);
+    check('"chicken, rice" top result uses both', mk[0].used.length, 2);
+    check('"chicken stock" alone doesn\'t count as chicken', data.makeWith(['chicken']).some((x) => x.r.id === 'garlic-butter-rice'), false);
+    check('"rice vinegar" doesn\'t count as rice', data.makeWith(['rice']).some((x) => x.r.id === 'ginger-pickled-beets'), false);
+    out.insertAdjacentHTML('beforeend', `<p class="muted">Top "chicken + rice" matches: ${mk.slice(0, 5).map((x) => x.r.title).join(', ')}</p>`);
+    check('"see recipe" becomes a link', data.linkify('When set, ice with chocolate icing (see recipe).', data.get('hedgehog-slice')).includes('#/recipe/chocolate-icing'), true);
+
+    const sum = document.getElementById('summary');
+    sum.textContent = fail ? `${fail} failed, ${pass} passed` : `All ${pass} checks passed ✓`;
+    sum.classList.toggle('bad', !!fail);
+    window.__results = { pass, fail };
+  </script>
+</body>
+</html>
