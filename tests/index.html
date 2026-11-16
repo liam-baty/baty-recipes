@@ -150,6 +150,18 @@
     const unparsed = all.flatMap((r) => r.ingredients.flatMap((g) => g.items)).filter((l) => !parseLine(l).parsed);
     out.insertAdjacentHTML('beforeend', `<p>${unparsed.length} of ${all.reduce((n, r) => n + r.ingredients.reduce((m, g) => m + g.items.length, 0), 0)} ingredient lines have no leading quantity (shown unchanged when scaling).</p>`);
 
+    // ---------- Send to the book ----------
+    section('Send to the book');
+    const book = await import('../js/book.js');
+    const mine = { id: 'my-test-pie', custom: true, title: 'Hedgehog Slice', group: 'Soups', part: 'x', source: null, yield: null, time: null,
+      introNotes: [], ingredients: [{ heading: null, items: ['1 cup water'] }], steps: [{ text: 'Boil.', section: undefined }], notes: [], appliances: [] };
+    const entry = book.bookEntry(mine);
+    check('new id avoids clashing with a book recipe', entry.id, 'hedgehog-slice-2');
+    check('part comes from the group', entry.part, 'Savoury Mains');
+    check('fields in recipes.json order', Object.keys(entry), ['id', 'title', 'part', 'group', 'source', 'yield', 'time', 'introNotes', 'ingredients', 'steps', 'notes', 'appliances', 'needsCheck']);
+    check('message has the markers', book.bookText(mine).includes(book.BEGIN) && book.bookText(mine).includes(book.END), true);
+    check('edited book recipe keeps its id', book.bookEntry({ ...data.get('pavlova'), edited: true }).id, 'pavlova');
+
     // ---------- Search ----------
     section('Search and "What can I make"');
     const titles = (list) => list.slice(0, 3).map((r) => r.id);

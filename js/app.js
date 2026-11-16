@@ -6,6 +6,7 @@ import * as data from './data.js';
 import * as store from './storage.js';
 import * as timers from './timers.js';
 import * as shop from './shoplist.js';
+import * as book from './book.js';
 import { esc, toast } from './util.js';
 
 import * as home from './views/home.js';
@@ -150,6 +151,9 @@ async function start() {
       <button class="btn primary" onclick="location.reload()">Try again</button></div>`;
     return;
   }
+
+  // If the book now includes your phone edits, tidy them away
+  try { book.tidy(); data.invalidate(); } catch (e) { console.warn(e); }
 
   if (!store.storageOk()) {
     toast("Your phone isn't letting the app save data (Private Browsing?). Changes will be lost when you close it.", { ms: 8000 });

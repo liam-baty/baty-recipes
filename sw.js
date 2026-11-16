@@ -10,7 +10,7 @@
 // so recipe-only changes show up on the next online visit even without a bump —
 // but bumping VERSION is still the reliable way to push any change.
 
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 const CACHE = `baty-recipes-${VERSION}`;
 
 // Every file the app needs. If you add a file, add it here too.
@@ -30,6 +30,7 @@ const FILES = [
   'js/timers.js',
   'js/share.js',
   'js/reminders.js',
+  'js/book.js',
   'js/views/common.js',
   'js/views/home.js',
   'js/views/recipe.js',

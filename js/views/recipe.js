@@ -4,8 +4,9 @@
 import * as data from '../data.js';
 import * as store from '../storage.js';
 import * as shop from '../shoplist.js';
-import { esc, toast, dialogForm, isoDate, fromIso, fmtDate, uid, addDays } from '../util.js';
+import { esc, toast, dialog, dialogForm, isoDate, fromIso, fmtDate, uid, addDays } from '../util.js';
 import { lineHtml } from '../ingredients.js';
+import * as book from '../book.js';
 import { withTimerButtons } from '../timers.js';
 import { recipeText, shareText, fmtK } from '../share.js';
 import { backLink } from './common.js';
@@ -52,6 +53,8 @@ export function render(el, { id }) {
         ${r.source ? `<p class="source">${esc(r.source)}</p>` : ''}
         ${r.yield || r.time ? `<p class="yield">${r.yield ? `<span>🍽 ${esc(r.yield)}</span>` : ''}${r.time ? ` <span>⏲ ${esc(r.time)}</span>` : ''}</p>` : ''}
       </header>
+
+      ${bookCard(r)}
 
       <div class="actions no-print" role="toolbar" aria-label="Recipe actions">
         <button class="act ${favs[id] ? 'on' : ''}" data-act="fav" aria-pressed="${!!favs[id]}"><span aria-hidden="true">${favs[id] ? '♥' : '♡'}</span>Favourite</button>
@@ -218,6 +221,21 @@ export function render(el, { id }) {
         toast(`Added ${added.length} items`, { actionLabel: 'Undo', onAction: () => shop.removeUids(added) });
         break;
       }
+      case 'send-book': await book.send(r); break;
+      case 'remove-copy': {
+        const target = data.bookRecipe(r.sentAs);
+        const c = await dialog(`<h2>Remove your phone copy?</h2>
+          <p>“${esc(target.title)}” is now in the family book. Your favourite, rating, notes, made-it dates and meal plans
+          for this recipe will move across to the book version.</p>
+          <div class="stack"><button class="btn primary" value="yes" autofocus>Remove my copy</button>
+          <button class="btn ghost" value="">Keep both</button></div>`);
+        if (c !== 'yes') return;
+        moveSavedData(r.id, target.id);
+        store.update('custom', (cu) => { delete cu[r.id]; });
+        toast('Done — showing the book version');
+        location.hash = `#/recipe/${target.id}`;
+        return;
+      }
       case 'plan': await addToPlan(r, k); return;
       case 'share': await shareText(r.title, recipeText(r, k)); return;
       case 'print': window.print(); return;
@@ -247,6 +265,37 @@ export function render(el, { id }) {
 }
 
 function fmtNum(k) { return String(+k.toFixed(2)); }
+
+/** The "only on this phone" card for recipes you added or edited. */
+function bookCard(r) {
+  if (!r.custom && !r.edited) return '';
+  const inBook = r.custom && r.sentAs && data.bookRecipe(r.sentAs);
+  if (inBook) {
+    return `<div class="book-card pad-x no-print"><div class="tip inline ok">
+      <p><strong>✓ This recipe is now in the family book.</strong> You can remove your phone copy.</p>
+      <div class="row gap wrap"><button class="btn primary small" data-act="remove-copy">Remove my copy</button>
+      <a class="btn small" href="#/recipe/${esc(r.sentAs)}">See book version</a></div></div></div>`;
+  }
+  return `<div class="book-card pad-x no-print"><div class="tip inline">
+    <p><strong>${r.custom ? 'This recipe is only on this phone.' : 'Your changes are only on this phone.'}</strong>
+    ${r.sentAs ? 'Sent to the book — it will show here once it has been added.' : 'Send it to the family book so everyone gets it.'}</p>
+    <button class="btn small" data-act="send-book">📖 ${r.sentAs ? 'Send again' : 'Send to the book'}</button></div></div>`;
+}
+
+/** Move favourites, ratings, notes, made-it dates, scale and plans from one recipe id to another. */
+function moveSavedData(from, to) {
+  for (const key of ['favs', 'ratings', 'notes', 'made', 'scales']) {
+    store.update(key, (m) => {
+      if (!(from in m)) return;
+      if (key === 'made') m[to] = [...new Set([...(m[to] || []), ...m[from]])];
+      else if (key === 'notes' && m[to]) m[to] = `${m[to]}\n\n${m[from]}`;
+      else if (!(to in m)) m[to] = m[from];
+      delete m[from];
+    });
+  }
+  store.update('recent', (list) => [...new Set(list.map((x) => (x === from ? to : x)))]);
+  store.update('plan', (p) => { Object.values(p).forEach((day) => day.forEach((e) => { if (e.recipeId === from) e.recipeId = to; })); });
+}
 
 /** Appliance fixes are saved as an edit on this phone. */
 function saveAppliances(r) {

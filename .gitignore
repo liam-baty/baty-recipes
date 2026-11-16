@@ -1,5 +1,8 @@
 # Local tool settings (not part of the website)
 .claude/
+# Recipes waiting to be added (tools/add_to_book.py) — keep only the note
+tools/inbox/*
+!tools/inbox/README.md
 # Windows/macOS clutter
 Thumbs.db
 .DS_Store

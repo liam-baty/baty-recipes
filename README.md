@@ -83,6 +83,27 @@ To mark a recipe for checking, set `"needsCheck": true`. It then shows a "check 
 
 `index.html` has a `noindex` tag, which tells search engines not to list the site. `robots.txt` asks them not to crawl it. Search engines only read `robots.txt` from the top level of a domain. For a site at `yourname.github.io/baty-recipes/`, the `noindex` tag is what actually does the work. Either way, **the site and the GitHub repository are public to anyone who has or guesses the link.** Don't put anything private in it.
 
+## Adding recipes from a phone ("Send to the book")
+
+Recipes added or edited in the app are saved on that phone only. To put one in the family book for everyone:
+
+1. **On the phone:** open the recipe. A purple box says "This recipe is only on this phone" (or "Your changes are only on this phone"). Tap **📖 Send to the book**. Send it to yourself by email, Messages or Notes, or tap Copy.
+2. **On the computer:** save the whole message as a `.txt` file in `tools/inbox/` (e.g. `tools/inbox/scones.txt`). Several files, or several recipes in one file, are fine.
+3. Open PowerShell in the `Baty recipes app` folder and run:
+
+   ```bash
+   python tools/add_to_book.py
+   ```
+
+   - It adds new recipes at the end of their group, and replaces edited recipes in place.
+   - It updates the data version and date, and bumps the app version in `sw.js`.
+   - It moves finished files to `tools/inbox/done/`.
+   - Add `--check` to preview what it would do without changing anything.
+4. **In GitHub Desktop:** Commit to main, then Push origin.
+5. **On the phone:** after **Update now**, the app sees the recipe is in the book and offers **Remove my copy**. The favourite, rating, notes, made-it dates and meal plans move across to the book version. Edits that now match the book are tidied away automatically.
+
+Files in `tools/inbox/` aren't uploaded to GitHub, apart from its README. The code is in `js/book.js` and `tools/add_to_book.py`.
+
 ## Shared Reminders (sharing between phones)
 
 The app's data doesn't sync between phones. To shop together, the app can send items to a **shared Reminders list**, which iCloud syncs to everyone it's shared with. iPhone doesn't let web apps add reminders directly, so the app passes the items to an Apple **Shortcut** (named "Baty Reminders" by default). The Shortcut adds one reminder per line. Set it up once: in the app, go to **Settings → Shared Reminders**, which has step-by-step instructions. Once it's switched on, the Shopping list gets a **Send to shared Reminders** button.
