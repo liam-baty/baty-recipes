@@ -161,7 +161,7 @@ export function parseLine(text) {
 // Ingredient names (for merging, sections and pantry staples)
 // ---------------------------------------------------------------------------
 
-const DESCRIPTORS = /\b(optional|each|about|approx|fresh|freshly|finely|roughly|thinly|coarsely|chopped|sliced|diced|minced|crushed|grated|ground|large|small|medium|extra|lightly|beaten|softened|melted|cold|warm|hot|room temperature|ripe|good quality|quality|packed|heaped|level|whole|boneless|skinless|shredded|peeled|halved|quartered|drained|rinsed|dried|dry|frozen|plus|for|of|a|an|the|some|good|big|few|enough)\b/g;
+const DESCRIPTORS = /\b(optional|each|pinch|dash|sprinkle|about|approx|fresh|freshly|finely|roughly|thinly|coarsely|chopped|sliced|diced|minced|crushed|grated|ground|large|small|medium|extra|lightly|beaten|softened|melted|cold|warm|hot|room temperature|ripe|good quality|quality|packed|heaped|level|whole|boneless|skinless|shredded|peeled|halved|quartered|drained|rinsed|dried|dry|frozen|plus|for|of|a|an|the|some|good|big|few|enough)\b/g;
 
 function singular(w) {
   if (/(ss|us|is)$/.test(w)) return w;
@@ -185,7 +185,47 @@ export function nameOf(text) {
   if (!n) return '';
   const words = n.split(' ');
   words[words.length - 1] = singular(words[words.length - 1]);
-  return words.join(' ');
+  return SYNONYMS[words.join(' ')] || words.join(' ');
+}
+
+// Different words for the same thing at the shops, so they merge on the list.
+const SYNONYMS = {
+  'brown onion': 'onion', 'white onion': 'onion', 'yellow onion': 'onion',
+  'green onion': 'spring onion', 'scallion': 'spring onion', 'green spring onion': 'spring onion'
+};
+
+// Preparation words that don't matter at the shops.
+const PREP_CUT = /\b(thinly|finely|roughly|coarsely|lightly|thickly|sliced|diced|chopped|quartered|halved|cubed|cut|crushed|minced|grated|shredded|peeled|deseeded|seeded|trimmed|drained|rinsed|softened|melted|beaten|sifted|julienned|torn|washed|at room temperature|room temperature|to serve|to taste|for serving|for garnish|optional|if desired|plus extra|or more)\b/i;
+// Cutting words that can be dropped from the start ("diced onion" → "onion"),
+// but not product words like "grated cheese", "minced garlic" or "crushed tomatoes".
+const PREP_LEAD = /^((?:thinly|finely|roughly|coarsely|sliced|diced|chopped|cubed|halved|quartered)\s+)+/i;
+
+/**
+ * Shopping-list wording for an ingredient description:
+ * "onion, thinly sliced" → "onion"; "chicken thigh fillets, quartered/large chunks" → "chicken thigh fillets";
+ * "meatballs (beef, chicken, lamb or pork)" → "meatballs".
+ * `packaged` keeps "chopped tomatoes" whole for cans and packets.
+ */
+export function cleanName(text, { packaged = false } = {}) {
+  let s = String(text).replace(/\[[^\]]*\]/g, ' ').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim();
+  // Keep commas in lists like "1 tsp each of ginger, cinnamon…" and "Topping: zucchini, red onion…"
+  if (!/\beach\b/i.test(s) && !/^[A-Za-z ]{2,20}:/.test(s)) s = s.split(/,|;|\s[–—-]\s/)[0];
+  if (!packaged) s = s.replace(PREP_LEAD, '');
+  // Cut at the first preparation word after the first word ("onion thinly sliced" → "onion")
+  const first = s.indexOf(' ');
+  if (first > 0) {
+    const m = s.slice(first).match(PREP_CUT);
+    if (m) s = s.slice(0, first + m.index);
+  }
+  return s.replace(/\b(and|or|with|into)\s*$/i, '').replace(/[\s/&,.:–-]+$/, '').trim();
+}
+
+/** One ingredient line as it should read on a shopping list, at scale k. */
+export function shoppingText(p, k = 1) {
+  if (typeof p === 'string') p = parseLine(p);
+  if (!p.parsed) return cleanName(p.original) || p.original.replace(/\s*\[[^\]]*\]\s*$/, '');
+  const name = cleanName(p.rest, { packaged: !!p.size || CONTAINERS.includes(p.unit) }) || p.rest;
+  return `${p.prefix}${amountText(p, k)} ${name}`.trim();
 }
 
 // ---------------------------------------------------------------------------
@@ -276,21 +316,23 @@ export function scaleLine(p, k) {
   const main = p.original.replace(/\s*\[[^\]]*\]\s*$/, '');
   if (k === 1) return { text: main, note: p.note, scaled: p.parsed };
   if (!p.parsed) return { text: main, note: p.note, scaled: false };
+  const rest = scaleParens(p.rest, k);
+  return { text: `${p.prefix}${amountText(p, k)}${rest ? ' ' + rest : ''}`, note: p.note, scaled: true };
+}
+
+/** The quantity + unit part of a parsed line at scale k: "1 ½ cups", "2 × 400 g cans". */
+function amountText(p, k) {
   const min = p.min * k;
   const max = p.max != null ? p.max * k : null;
-  let amount;
   if (p.size) {
     const def = UNIT_BY_KEY[p.unit];
+    if (min === 1 && max == null) return `${p.size} ${def.one}`; // "400 g can", not "1 × 400 g can"
     const count = fmtFraction(min) + (max != null ? '–' + fmtFraction(max) : '');
-    amount = `${count} × ${p.size} ${(max ?? min) > 1 ? def.many : def.one}`;
-  } else if (p.unit && !p.unitText) {
-    // Unit found inside the name ("2 garlic cloves"): keep the original word order
-    amount = fmtAmount(min, max, null);
-  } else {
-    amount = fmtAmount(min, max, p.unit, p.unitText);
+    return `${count} × ${p.size} ${(max ?? min) > 1 ? def.many : def.one}`;
   }
-  const rest = scaleParens(p.rest, k);
-  return { text: `${p.prefix}${amount}${rest ? ' ' + rest : ''}`, note: p.note, scaled: true };
+  // Unit found inside the name ("2 garlic cloves"): keep the original word order
+  if (p.unit && !p.unitText) return fmtAmount(min, max, null);
+  return fmtAmount(min, max, p.unit, p.unitText);
 }
 
 // ---------------------------------------------------------------------------
@@ -316,14 +358,14 @@ export function combine(items) {
   const out = [];
   for (const it of items) {
     const key = mergeKey(it.parsed);
-    if (!key) { out.push({ text: scaleLine(it.parsed, it.scale).text, members: [it], merged: false }); continue; }
+    if (!key) { out.push({ text: shoppingText(it.parsed, it.scale), members: [it], merged: false }); continue; }
     if (!byKey.has(key)) byKey.set(key, []);
     byKey.get(key).push(it);
   }
   for (const [, group] of byKey) {
     if (group.length === 1) {
       const it = group[0];
-      out.unshift({ text: scaleLine(it.parsed, it.scale).text, members: group, merged: false });
+      out.unshift({ text: shoppingText(it.parsed, it.scale), members: group, merged: false });
       continue;
     }
     // Add up quantities in a common base unit
@@ -347,16 +389,18 @@ export function combine(items) {
     }
     // Use wording from a line where the unit was written up front ("3 cloves garlic"),
     // otherwise the simplified name, so we never get "5 cloves garlic cloves".
-    const tidy = group.find((it) => it.parsed.unitText || !it.parsed.unit)?.parsed;
-    const label = tidy ? displayName(tidy.rest, max > 1 && !tidy.unit) : first.name;
+    // Of those, the plainest wording wins ("onions" rather than "brown onion").
+    const tidy = group.filter((it) => it.parsed.unitText || !it.parsed.unit).map((it) => it.parsed)
+      .sort((a, b) => cleanName(a.rest).length - cleanName(b.rest).length)[0];
+    const label = tidy ? displayName(tidy, max > 1 && !tidy.unit) : first.name;
     out.unshift({ text: `${amount} ${label}`, members: group, merged: true });
   }
   return out;
 }
 
 /** Tidy name for a merged line: "onions, thinly sliced" → "onions" */
-function displayName(rest, plural) {
-  let n = rest.replace(/\([^)]*\)/g, '').split(/,|;/)[0].replace(/\s+/g, ' ').trim();
+function displayName(p, plural) {
+  let n = cleanName(p.rest, { packaged: !!p.size || CONTAINERS.includes(p.unit) }) || p.name;
   if (plural && /[a-z]$/i.test(n) && !/s$/i.test(n)) {
     n = /(ch|sh|x|o)$/i.test(n) ? n + 'es' : n + 's';
   }

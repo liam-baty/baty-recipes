@@ -85,11 +85,12 @@ To mark a recipe for checking, set `"needsCheck": true`. It then shows a "check 
 
 ## Shared Reminders (sharing between phones)
 
-The app's data doesn't sync between phones. To shop together, the app can send items to a **shared Reminders list**, which iCloud syncs to everyone it's shared with. iPhone doesn't let web apps add reminders directly, so the app passes the items to an Apple **Shortcut** (named "Baty Reminders" by default). The Shortcut adds one reminder per line. Set it up once: in the app, go to **Settings → Shared Reminders**, which has step-by-step instructions. Once it's switched on, these buttons appear:
+The app's data doesn't sync between phones. To shop together, the app can send items to a **shared Reminders list**, which iCloud syncs to everyone it's shared with. iPhone doesn't let web apps add reminders directly, so the app passes the items to an Apple **Shortcut** (named "Baty Reminders" by default). The Shortcut adds one reminder per line. Set it up once: in the app, go to **Settings → Shared Reminders**, which has step-by-step instructions. Once it's switched on, the Shopping list gets a **Send to shared Reminders** button.
 
-- **Shopping list → Send to shared Reminders.** Sends items that aren't ticked and aren't pantry staples, then offers to tick them off in the app.
-- **Recipe → All to Reminders**, or **Choose items → Ticked to Reminders.** Uses the current serving scale.
-- **Meal plan → Week's shopping to Reminders.** Merges the whole week's ingredients and leaves out pantry staples.
+- Build the list in the app first, from recipes and the meal plan. That's where like items merge ("1 onion, sliced" + "2 onions" becomes "3 onions").
+- The button sends items that aren't ticked and aren't pantry staples, then offers to tick them off in the app so they aren't sent twice.
+- Items are sent in shopping wording, without preparation notes ("1 onion", not "1 onion, thinly sliced"). On the app's list, "Show recipes" shows the full original lines.
+- Reminders can't see what's already on its list, so sending the same thing twice adds it twice.
 
 The code is in `js/reminders.js`.
 

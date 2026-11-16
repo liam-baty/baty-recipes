@@ -106,6 +106,25 @@
     ]).map((l) => l.text);
     check('merged, scaled, staples left out', pend.sort(), ['2 cups milk', '4 onions']);
 
+    // ---------- Shopping wording ----------
+    section('Shopping wording (no preparation notes)');
+    const { shoppingText } = await import('../js/ingredients.js');
+    check('onion, thinly sliced', shoppingText('1 onion, thinly sliced'), '1 onion');
+    check('chicken thigh fillets', shoppingText('600 g chicken thigh fillets, quartered/large chunks'), '600 g chicken thigh fillets');
+    check('no comma prep', shoppingText('1 large onion, peeled and thinly sliced'), '1 large onion');
+    check('brackets removed', shoppingText('500 g meatballs (beef, chicken, lamb or pork)'), '500 g meatballs');
+    check('leading cut word', shoppingText('1/4 cup finely chopped onion'), '¼ cup onion');
+    check('product word kept', shoppingText('1 cup grated cheese'), '1 cup grated cheese');
+    check('can keeps "chopped tomatoes"', shoppingText('2 x 400 g tins chopped tomatoes'), '2 × 400 g cans chopped tomatoes');
+    check('garlic cloves, crushed', shoppingText('3 garlic cloves, crushed'), '3 garlic cloves');
+    check('to taste', shoppingText('Salt and pepper, to taste'), 'Salt and pepper');
+    check('"each of" list kept', shoppingText('1 tsp each of ground ginger, cinnamon, salt and turmeric'), '1 tsp each of ground ginger, cinnamon, salt and turmeric');
+    check('scaled', shoppingText('1 1/2 cups milk, warmed', 2), '3 cups milk');
+    check('brown onion merges with onion', combine(items([['1 brown onion, finely chopped', 1], ['2 onions', 1]])).map((x) => x.text), ['3 onions']);
+    check('single can reads naturally', shoppingText('400 g can kidney beans, drained', 1), '400 g can kidney beans');
+    check('"Good pinch salt and pepper" is a staple', isStaple(parseLine('Good pinch salt and pepper'), ['salt', 'pepper']), true);
+    check('scallions = spring onions', parseLine('3 scallions').name, parseLine('2 spring onions, sliced').name);
+
     // ---------- Timers ----------
     section('Timers found in the method');
     const d = (t) => findDurations(t).map((x) => [x.min, x.max]);

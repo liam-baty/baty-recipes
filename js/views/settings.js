@@ -54,8 +54,11 @@ export function render(el) {
 
       <section class="pad-x card" id="reminders">
         <h2>Shared Reminders</h2>
-        <p class="small">Send the shopping list, a recipe's ingredients or a week's shopping to a <strong>shared Reminders list</strong>.
+        <p class="small">Send your shopping list to a <strong>shared Reminders list</strong>.
           Reminders syncs through iCloud, so everyone sharing the list sees the items and can tick them off.</p>
+        <p class="small muted">Build the list in the Shopping tab first — recipes and meal plans added there are merged
+          (two recipes' onions become one line) — then send it in one go. Reminders can't see what's already on its list,
+          so sending the same thing twice adds it twice.</p>
         <label class="check"><input type="checkbox" name="reminders" ${s.reminders ? 'checked' : ''}> Show “Send to Reminders” buttons</label>
         <label class="field">Shortcut name
           <input type="text" name="remindersShortcut" value="${esc(s.remindersShortcut || DEFAULT_SHORTCUT)}" autocomplete="off" autocapitalize="words">
