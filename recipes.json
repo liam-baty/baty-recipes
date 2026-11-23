@@ -1,7 +1,7 @@
 {
   "title": "Recipe Collection",
-  "version": 1,
-  "generated": "2026-11-16",
+  "version": 2,
+  "generated": "2026-11-23",
   "parts": [
     {
       "name": "Savoury Mains",
@@ -10,9 +10,9 @@
         "Asian Stir-Fries & Noodles",
         "Asian Rice Bowls & Egg Dishes",
         "Dumplings, Buns & Chinese BBQ",
-        "Pasta, Risoni & Risotto",
-        "Mince Favourites",
-        "Slow Cooker & Roasts",
+        "Pasta, Rice & Risotto",
+        "Mince & Skillet Favourites",
+        "Slow Cooker, Braises & Roasts",
         "Pies, Bakes & Savoury Slices",
         "Soups"
       ]
@@ -40,7 +40,7 @@
         "Cakes & Loaves",
         "Biscuits & Cookies",
         "Slices & No-Bake Treats",
-        "Desserts & Frozen Treats",
+        "Desserts, Treats & Snacks",
         "Baking Basics"
       ]
     }
@@ -239,6 +239,166 @@
       ],
       "notes": [
         "Add a can of chickpeas for extra protein."
+      ],
+      "appliances": [
+        "slow cooker"
+      ],
+      "needsCheck": false
+    },
+    {
+      "id": "ground-beef-curry",
+      "title": "Ground Beef Curry",
+      "part": "Savoury Mains",
+      "group": "Curries & Saucy Simmers",
+      "source": "Recipe from khinskitchen.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "300 g ground beef",
+            "1 potato, cut into small cubes",
+            "2 shallot onions, finely chopped",
+            "2 vine-ripened tomatoes, chopped",
+            "1 Tbsp tomato purée/paste",
+            "1 tsp ginger paste",
+            "1 tsp garlic paste",
+            "3 Tbsp oil",
+            "1 1/2 cups warm water (won't need it all)"
+          ]
+        },
+        {
+          "heading": "Seasonings",
+          "items": [
+            "1/2 tsp turmeric powder",
+            "1 1/2 tsp garam masala powder",
+            "1/2 tsp cumin",
+            "1 tsp chilli/paprika",
+            "1 1/2 tsp salt",
+            "1/4 tsp black pepper"
+          ]
+        },
+        {
+          "heading": "To serve",
+          "items": [
+            "Cooked basmati rice",
+            "Sliced chilli, for garnish (optional)"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Finely chop onions and tomatoes. Cut potato into small cubes."
+        },
+        {
+          "text": "In a large pan/skillet, drizzle 3 Tbsp of oil and sauté the potato cubes over medium heat until golden brown. Remove from oil and set aside."
+        },
+        {
+          "text": "In the remaining oil, add the chopped onions and sauté them until translucent, then add the garlic and ginger. Stir for a few seconds and follow with tomato."
+        },
+        {
+          "text": "When the tomatoes become soft, add the tomato purée, salt, turmeric, garam masala, chilli powder/paprika and cumin. Stir well for 5 seconds, then follow with the ground beef and cook until brown."
+        },
+        {
+          "text": "Return potato to pan. Pour in some warm water, stir and simmer for another 8–10 minutes on low heat until beef and potato are cooked."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
+      "id": "lamb-shanks-massaman-curry",
+      "title": "Lamb Shanks Massaman Curry",
+      "part": "Savoury Mains",
+      "group": "Curries & Saucy Simmers",
+      "source": "Recipe from RecipeTin Eats",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "1.5 kg lamb shanks (5 small, 4 medium or 2–3 large)",
+            "114 g massaman curry paste (Maesri or Ayam)",
+            "400 ml coconut milk (quality, like Ayam)",
+            "2 cups chicken stock",
+            "1 onion, halved then sliced 1 cm",
+            "400 g small potatoes",
+            "1 star anise",
+            "1 cinnamon stick",
+            "Rice, to serve"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Preheat oven to 180 °C (160 °C fan)."
+        },
+        {
+          "text": "Mix curry paste, coconut milk and stock in a 22 x 33 cm (9 x 13 inch) baking dish, preferably glass or ceramic. Add onion, potatoes, star anise, cinnamon and lamb."
+        },
+        {
+          "text": "Turn shanks to coat in sauce, then cover with foil."
+        },
+        {
+          "text": "Bake in oven for 2 hours. Remove foil, bake for a further 1 hour (small shanks) or 1.5 hours (medium–large shanks), turning lamb twice to brown evenly, until meat is so tender it can easily be teased apart with 2 forks."
+        },
+        {
+          "text": "Remove lamb onto a plate. Carefully skim excess fat off the surface. Mix sauce in baking dish – it should be reduced down to a syrupy thickness."
+        },
+        {
+          "text": "Serve lamb with sauce over rice."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "oven"
+      ],
+      "needsCheck": false
+    },
+    {
+      "id": "slow-cooker-chicken-curry-dump-bag-option",
+      "title": "Slow Cooker Chicken Curry (Dump Bag Option)",
+      "part": "Savoury Mains",
+      "group": "Curries & Saucy Simmers",
+      "source": "Recipe from TamingTwins.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "4 cloves garlic, chopped",
+            "2 tsp ginger paste/fresh",
+            "3 Tbsp medium curry powder",
+            "1/2 tsp chilli flakes",
+            "1/2 tsp salt",
+            "100 g mango/fruit chutney",
+            "400 ml coconut milk",
+            "1 large onion, peeled and finely chopped",
+            "1 kg boneless, skinless chicken thighs",
+            "1 tsp garam masala"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Put everything except garam masala into slow cooker and stir."
+        },
+        {
+          "text": "Put lid on and cook on High for 4 hours or Low for at least 6 hours."
+        },
+        {
+          "text": "When chicken is tender and falling apart, shred with 2 forks and stir in garam masala. Mix well."
+        }
+      ],
+      "notes": [
+        "Dump bag prep – put everything except the garam masala in a freezer bag."
       ],
       "appliances": [
         "slow cooker"
@@ -932,6 +1092,47 @@
       "needsCheck": false
     },
     {
+      "id": "garlic-ramen-noodles",
+      "title": "Garlic Ramen Noodles",
+      "part": "Savoury Mains",
+      "group": "Asian Stir-Fries & Noodles",
+      "source": "Recipe from recipetineats.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "140 g dried ramen or noodle cakes",
+            "30 g (2 Tbsp) butter",
+            "2 Tbsp (6 cloves) garlic, finely minced",
+            "2 tsp oyster sauce",
+            "2 tsp soy sauce",
+            "1 1/2 tsp Maggi seasoning (or 1 tsp extra soy sauce and 1/2 tsp Worcestershire)",
+            "1/4 cup noodle cooking water",
+            "1/4 cup finely grated parmesan",
+            "1/4 cup green/spring onion, thinly sliced",
+            "Optional extras: fried/soft-boiled egg, dash of sesame oil"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cook noodles per packet directions. Scoop out 1/2 cup cooking water. Strain noodles and set aside."
+        },
+        {
+          "text": "Melt butter in a saucepan over medium heat. Add garlic and cook, stirring, until soft. Add oyster sauce, soy sauce and Maggi seasoning with 1/4 cup cooking water. Stir to combine."
+        },
+        {
+          "text": "Add cooked noodles, parmesan and green onion. Toss until the noodles are all coated and the sauce is not pooled in the bottom of the pan. Add more cooking water, 1 Tbsp at a time, if needed to loosen the noodles."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
       "id": "speedy-pork-satay-san-choy-bau",
       "title": "Speedy Pork Satay San Choy Bau",
       "part": "Savoury Mains",
@@ -1088,7 +1289,7 @@
       "part": "Savoury Mains",
       "group": "Asian Rice Bowls & Egg Dishes",
       "source": null,
-      "yield": "2 | Prep 10 mins | Cook 30 mins | Total 40 mins",
+      "yield": "Serves 2 | Prep 10 mins | Cook 30 mins | Total 40 mins",
       "time": null,
       "introNotes": [],
       "ingredients": [
@@ -1265,6 +1466,104 @@
       "needsCheck": false
     },
     {
+      "id": "japanese-taco-rice",
+      "title": "Japanese Taco Rice",
+      "part": "Savoury Mains",
+      "group": "Asian Rice Bowls & Egg Dishes",
+      "source": "Recipe from Marion's Kitchen",
+      "yield": "Serves 2",
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "2 cups cooked rice",
+            "2 Tbsp vegetable oil",
+            "1/2 red onion, finely diced",
+            "1 cup diced capsicum",
+            "500 g ground beef",
+            "Poached eggs, to serve",
+            "2 Tbsp sour cream",
+            "1/2 cup coarsely grated mozzarella",
+            "1/2 cup coarsely grated cheese"
+          ]
+        },
+        {
+          "heading": "Spice mix",
+          "items": [
+            "3 tsp Cajun seasoning",
+            "1 tsp ground cumin",
+            "2 tsp smoked paprika",
+            "1 tsp dried oregano",
+            "3 dried bay leaves",
+            "2 tsp onion powder",
+            "1/2 tsp ground black pepper",
+            "1 tsp sea salt"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Make spice mix: add all ingredients into a small bowl and mix."
+        },
+        {
+          "text": "Heat oil in a heavy-based non-stick sauté pan over medium-high heat. Once oil is hot, add the finely diced red onion and diced capsicum. Stir-fry for about a minute until the vegetables begin to soften. Then add the ground beef to the pan. Use a spatula to break up the beef as it cooks, ensuring it browns evenly – about 5 minutes."
+        },
+        {
+          "text": "Once beef is browned, add your spice mix. Stir-fry the mixture for another 3–4 minutes, allowing the spices to fully infuse into the beef."
+        },
+        {
+          "text": "Assemble dish: place cooked rice in a bowl and spoon over beef mixture. Top with shredded iceberg lettuce, diced tomato and a poached egg. Can also have sour cream and grated cheese."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
+      "id": "ban-fan-simple-chinese-rice-bowl",
+      "title": "Ban Fan – Simple Chinese Rice Bowl",
+      "part": "Savoury Mains",
+      "group": "Asian Rice Bowls & Egg Dishes",
+      "source": "Recipe from The Woks of Life",
+      "yield": "Serves 1",
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "1 Tbsp oyster sauce",
+            "1 Tbsp light soy sauce",
+            "1/2 tsp sugar",
+            "1 Tbsp minced garlic",
+            "2 Tbsp chopped scallion",
+            "2 Tbsp vegetable oil",
+            "2 eggs",
+            "1 cup cooked rice"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Add the ingredients to a medium heatproof bowl in the order listed – oyster sauce, light soy sauce, sugar, garlic and scallion."
+        },
+        {
+          "text": "Heat oil in a small saucepan until it starts to smoke."
+        },
+        {
+          "text": "Drizzle the hot oil over the aromatics and hear it sizzle."
+        },
+        {
+          "text": "Fry the eggs in the same saucepan. Add warm cooked rice to bowls, top with eggs, and mix well."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
       "id": "omurice-japanese-rice-omelette",
       "title": "Omurice – Japanese Rice Omelette",
       "part": "Savoury Mains",
@@ -1368,7 +1667,7 @@
       "part": "Savoury Mains",
       "group": "Asian Rice Bowls & Egg Dishes",
       "source": "Recipe from eatchofood.com",
-      "yield": "2",
+      "yield": "Serves 2",
       "time": null,
       "introNotes": [],
       "ingredients": [
@@ -1675,6 +1974,72 @@
       "needsCheck": false
     },
     {
+      "id": "crispy-pork-belly-chinese-siu-yuk",
+      "title": "Crispy Pork Belly (Chinese Siu Yuk)",
+      "part": "Savoury Mains",
+      "group": "Dumplings, Buns & Chinese BBQ",
+      "source": "Recipe from kwokspots.com (method summarised; temperatures converted from °F)",
+      "yield": "Serves 6",
+      "time": "Prep 10 mins, cook 2 hrs, rest 12 hrs (overnight) – total about 14 hrs 10 mins",
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": "Pork belly",
+          "items": [
+            "1.8 kg (4 lb) skin-on pork belly (makes 2 portions)",
+            "1 tsp five spice powder",
+            "2 tsp brown sugar",
+            "2 tsp garlic powder",
+            "1 tsp salt",
+            "2 Tbsp oil or white vinegar",
+            "1/2 cup kosher salt (or other coarse salt), for topping"
+          ]
+        },
+        {
+          "heading": "Sauce",
+          "items": [
+            "2 Tbsp hoisin sauce",
+            "2 Tbsp water"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cut the pork belly in half so each piece is a slab of about 20 x 15 cm (8 x 6 inches)."
+        },
+        {
+          "text": "Cut vertical slits about 1 cm (1/2 inch) deep into the meat side. Season only the meat side with the five spice, brown sugar, garlic powder and salt."
+        },
+        {
+          "text": "Place skin side up on a wire rack in the fridge overnight, uncovered, so the skin dries out."
+        },
+        {
+          "text": "The next day, wrap a snug foil \"boat\" around the meat side and edges of each piece, leaving the skin exposed. This stops the meat from burning."
+        },
+        {
+          "text": "Brush the skin with the oil or vinegar, then cover the skin completely with the coarse salt. Use kosher or another coarse salt so it doesn't soak into the skin – fine sea salt is too fine."
+        },
+        {
+          "text": "Bake in the oven at 150 °C (300 °F) for 1 1/2 hours. The meat will shrink and the pork will sit taller. Use the oven, not the air fryer, for this step, as the air fryer fan will blow the salt away."
+        },
+        {
+          "text": "Remove all the salt from the skin and brush the skin with a layer of oil."
+        },
+        {
+          "text": "Air fry at 230 °C (450 °F) for about 20 minutes, until the skin is puffed, light and crispy. No air fryer: use the oven on its highest fan-forced setting."
+        },
+        {
+          "text": "Cut into pieces and serve with the hoisin sauce mixed 1:1 with water."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "air fryer",
+        "oven"
+      ],
+      "needsCheck": false
+    },
+    {
       "id": "char-siu-bao-steamed-bbq-pork-buns",
       "title": "Char Siu Bao (Steamed BBQ Pork Buns)",
       "part": "Savoury Mains",
@@ -1790,7 +2155,7 @@
       "id": "rainbow-bolognaise",
       "title": "Rainbow Bolognaise",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from Coles magazine",
       "yield": null,
       "time": null,
@@ -1839,7 +2204,7 @@
       "id": "creamy-tomato-pasta",
       "title": "Creamy Tomato Pasta",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from thekitchn.com",
       "yield": null,
       "time": null,
@@ -1895,7 +2260,7 @@
       "id": "homemade-tomato-pasta-sauce-with-topping-vegetarian",
       "title": "Homemade Tomato Pasta Sauce (with Topping) (Vegetarian)",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe adapted from The Spruce Eats",
       "yield": null,
       "time": null,
@@ -1946,7 +2311,7 @@
       "id": "fettuccine-with-cherry-tomato-butter-sauce",
       "title": "Fettuccine with Cherry Tomato Butter Sauce",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from sipandfeast.com",
       "yield": null,
       "time": null,
@@ -1991,7 +2356,7 @@
       "id": "quick-and-easy-fettuccine-carbonara",
       "title": "Quick & Easy Fettuccine Carbonara",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from perfectitaliano.com.au",
       "yield": null,
       "time": null,
@@ -2034,7 +2399,7 @@
       "id": "pasta-with-leek-and-bacon-and-zucchini",
       "title": "Pasta with Leek and Bacon (and Zucchini)",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from Australia's Best Recipes",
       "yield": null,
       "time": null,
@@ -2092,12 +2457,215 @@
       "needsCheck": false
     },
     {
+      "id": "creamy-leek-and-garlic-spaghetti-pasta",
+      "title": "Creamy Leek & Garlic Spaghetti (Pasta)",
+      "part": "Savoury Mains",
+      "group": "Pasta, Rice & Risotto",
+      "source": "Recipe from Lord Byron's Kitchen (lordbyronskitchen.com)",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "450 g spaghetti (pasta), cooked and drained, 1/4 cup pasta water reserved",
+            "1/4 cup salted butter",
+            "2 large leeks, trimmed, sliced and cleaned",
+            "1 medium onion, finely chopped",
+            "1/2 tsp ground black pepper",
+            "1/4 tsp salt",
+            "4 cloves garlic, minced",
+            "1/4 cup whole milk",
+            "1/2 cup parmesan cheese",
+            "1/4 cup reserved pasta water (from above)",
+            "Parsley, finely chopped, for garnish"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cook pasta (slightly undercook), setting aside 1/4 cup pasta water. Drain pasta and set aside."
+        },
+        {
+          "text": "In a large pan over medium heat, add the butter, onions, leeks, salt and ground black pepper. Stir together, and cook until onions are translucent and the leeks have wilted a bit – about 5 minutes."
+        },
+        {
+          "text": "Next, add the garlic and cook for 2 more minutes."
+        },
+        {
+          "text": "Add the milk and parmesan cheese. Stir to combine."
+        },
+        {
+          "text": "Add the cooked pasta and toss with tongs until well coated."
+        },
+        {
+          "text": "If the butter and milk sauce is too thick, add some of the reserved pasta water."
+        },
+        {
+          "text": "Cook, continuing to toss, for 2 minutes to reheat pasta."
+        },
+        {
+          "text": "Plate and garnish with parmesan and parsley."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
+      "id": "authentic-fettuccine-alfredo",
+      "title": "Authentic Fettuccine Alfredo",
+      "part": "Savoury Mains",
+      "group": "Pasta, Rice & Risotto",
+      "source": null,
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "400 g fettuccine",
+            "250 g unsalted butter",
+            "150 g (1 1/2 cups) freshly grated parmesan",
+            "1/2 tsp sea salt flakes",
+            "1/2 tsp black pepper"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bring a large pot of salted water to the boil. Add the fettuccine and cook according to package directions, minus 1 minute. Reserve about 1 cup of pasta cooking water, then drain pasta."
+        },
+        {
+          "text": "While pasta is cooking, melt butter in a large, heavy-based pan over medium-low heat. As soon as butter is melted, turn heat off."
+        },
+        {
+          "text": "Add pasta to pan with butter and toss gently. Gradually add the parmesan, gently tossing until cheese is melted and forms a creamy sauce."
+        },
+        {
+          "text": "Add reserved pasta water, 1–2 Tbsp at a time, tossing gently until desired consistency is reached. Season with salt and pepper."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
+      "id": "homemade-alfredo-sauce",
+      "title": "Homemade Alfredo Sauce",
+      "part": "Savoury Mains",
+      "group": "Pasta, Rice & Risotto",
+      "source": "Recipe from bake-eat-repeat.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "225 g pasta",
+            "2 Tbsp butter",
+            "2 Tbsp olive oil",
+            "2 garlic cloves, minced",
+            "2 cups heavy whipping cream/thickened cream",
+            "1/2 tsp dried thyme",
+            "1/2 tsp oregano",
+            "1/4 tsp salt",
+            "1/4 tsp pepper",
+            "3/4 cup shredded mozzarella/cheese",
+            "1/2 cup shredded parmesan cheese"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cook pasta according to package directions (or slightly less). Drain."
+        },
+        {
+          "text": "Meanwhile, in a medium saucepan over medium heat, melt the butter and olive oil."
+        },
+        {
+          "text": "Add the garlic and cook, stirring, for about 30 seconds, until fragrant."
+        },
+        {
+          "text": "Add the cream, thyme, oregano, salt and pepper and bring the sauce to a high simmer (the sauce should be steaming with small bubbles forming on the edges but not quite boiling)."
+        },
+        {
+          "text": "Reduce the heat to medium-low, and cook, stirring often, until the sauce is thickened slightly, about 5 minutes."
+        },
+        {
+          "text": "Slowly stir in the cheese and parmesan, and continue cooking until cheese is melted and the sauce is thick and smooth. The sauce will continue to thicken as it cools on the pasta (can add a splash of pasta water)."
+        },
+        {
+          "text": "Keep sauce warm until pasta is ready."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
+      "id": "light-alfredo-sauce",
+      "title": "Light Alfredo Sauce",
+      "part": "Savoury Mains",
+      "group": "Pasta, Rice & Risotto",
+      "source": "Recipe from bake-eat-repeat.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "225 g pasta",
+            "2 Tbsp butter",
+            "2 cloves garlic, minced",
+            "2 Tbsp flour",
+            "1 3/4 cups milk",
+            "1/2 tsp dried thyme",
+            "1/2 tsp dried oregano",
+            "1/4 tsp salt",
+            "1/4 tsp pepper",
+            "1/4 cup shredded parmesan cheese"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cook pasta. Drain."
+        },
+        {
+          "text": "Meanwhile, in a medium saucepan over medium heat, melt the butter."
+        },
+        {
+          "text": "Add the garlic and cook, stirring, for about 30 seconds, until fragrant."
+        },
+        {
+          "text": "Whisk in the flour, and cook, stirring constantly, until it's lightly browned, about 1 minute."
+        },
+        {
+          "text": "Slowly whisk in the milk, stirring until it is incorporated and smooth."
+        },
+        {
+          "text": "Add the thyme, oregano, salt, pepper and parmesan and whisk continuously for 3–4 minutes until the sauce has thickened slightly."
+        },
+        {
+          "text": "Reduce the heat to a low simmer until the pasta is ready."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
       "id": "italian-style-sausage-pasta",
       "title": "Italian-Style Sausage Pasta",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Coles magazine clipping (method summarised)",
-      "yield": "4 | Prep 10 mins | Cooking 15 mins",
+      "yield": "Serves 4 | Prep 10 mins | Cooking 15 mins",
       "time": null,
       "introNotes": [],
       "ingredients": [
@@ -2134,9 +2702,9 @@
       "id": "tuna-and-tomato-linguine",
       "title": "Tuna & Tomato Linguine",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Coles magazine clipping (method summarised)",
-      "yield": "4 | Prep 10 mins | Cooking 15 mins",
+      "yield": "Serves 4 | Prep 10 mins | Cooking 15 mins",
       "time": null,
       "introNotes": [],
       "ingredients": [
@@ -2181,9 +2749,9 @@
       "id": "chilli-prawn-linguine",
       "title": "Chilli Prawn Linguine",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Coles magazine clipping (method summarised)",
-      "yield": "4 | Prep and cooking 25 mins",
+      "yield": "Serves 4 | Prep and cooking 25 mins",
       "time": null,
       "introNotes": [],
       "ingredients": [
@@ -2220,7 +2788,7 @@
       "id": "honey-mustard-and-bacon-pasta-bake",
       "title": "Honey Mustard and Bacon Pasta Bake",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from Coles magazine",
       "yield": null,
       "time": null,
@@ -2264,7 +2832,7 @@
       "id": "honey-mustard-chicken-risoni",
       "title": "Honey Mustard Chicken Risoni",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from taste.com.au",
       "yield": null,
       "time": null,
@@ -2306,7 +2874,7 @@
       "id": "30-minute-cheesy-chicken-risoni",
       "title": "30-Minute Cheesy Chicken Risoni",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from myfoodbook.com.au",
       "yield": null,
       "time": null,
@@ -2351,7 +2919,7 @@
       "id": "sheet-pan-gnocchi",
       "title": "Sheet-Pan Gnocchi",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from bonappetit.com",
       "yield": null,
       "time": null,
@@ -2398,7 +2966,7 @@
       "id": "leek-lemon-and-asparagus-risotto",
       "title": "Leek, Lemon and Asparagus Risotto",
       "part": "Savoury Mains",
-      "group": "Pasta, Risoni & Risotto",
+      "group": "Pasta, Rice & Risotto",
       "source": "Recipe from taste.com.au (Coles magazine)",
       "yield": null,
       "time": null,
@@ -2441,10 +3009,51 @@
       "needsCheck": false
     },
     {
+      "id": "sausage-and-vegetable-paella",
+      "title": "Sausage & Vegetable Paella",
+      "part": "Savoury Mains",
+      "group": "Pasta, Rice & Risotto",
+      "source": "Recipe from Woolworths",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "1 Tbsp olive oil",
+            "450 g pkt Beef & Pork Chorizo Sausages",
+            "1 brown onion, finely chopped",
+            "1 red capsicum, seeded, chopped",
+            "1 zucchini, halved lengthways, sliced",
+            "2 tsp paprika (smoked?)",
+            "1 1/2 cups (300 g) white long-grain rice",
+            "1 L chicken liquid stock",
+            "1 cup (120 g) frozen peas",
+            "Lemon, for serving"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Heat half the oil in a large deep frying pan over medium-high heat. Add sausage and cook, turning, for 8 minutes or until cooked through and brown all over. Thickly slice."
+        },
+        {
+          "text": "Heat the remaining oil in the pan. Add the onion and cook, stirring, for 3–4 minutes or until onion softens. Add the capsicum, zucchini and paprika. Cook, stirring, for 2 minutes or until aromatic. Add the rice and stock and stir to combine. Season. Bring to the boil, then reduce heat to low. Cook, stirring occasionally, for 20 minutes or until the rice is (just) tender and the liquid is absorbed."
+        },
+        {
+          "text": "Top the rice mixture with peas and sausage. Cover, and cook for 5 minutes or until heated through. Drizzle with lemon juice as desired."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
       "id": "chilli-con-carne",
       "title": "Chilli Con Carne",
       "part": "Savoury Mains",
-      "group": "Mince Favourites",
+      "group": "Mince & Skillet Favourites",
       "source": null,
       "yield": null,
       "time": null,
@@ -2509,7 +3118,7 @@
       "id": "loaded-nachos",
       "title": "Loaded Nachos",
       "part": "Savoury Mains",
-      "group": "Mince Favourites",
+      "group": "Mince & Skillet Favourites",
       "source": null,
       "yield": null,
       "time": null,
@@ -2558,7 +3167,7 @@
       "id": "breakfast-burrito",
       "title": "Breakfast Burrito",
       "part": "Savoury Mains",
-      "group": "Mince Favourites",
+      "group": "Mince & Skillet Favourites",
       "source": null,
       "yield": null,
       "time": null,
@@ -2624,7 +3233,7 @@
       "id": "rissoles",
       "title": "Rissoles",
       "part": "Savoury Mains",
-      "group": "Mince Favourites",
+      "group": "Mince & Skillet Favourites",
       "source": "Recipe from RecipeTin Eats",
       "yield": null,
       "time": null,
@@ -2670,10 +3279,57 @@
       "needsCheck": false
     },
     {
+      "id": "deluxe-corned-beef-hash",
+      "title": "Deluxe Corned Beef Hash",
+      "part": "Savoury Mains",
+      "group": "Mince & Skillet Favourites",
+      "source": "Recipe from allrecipes.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "2 Tbsp butter",
+            "2 Tbsp olive oil",
+            "1 large onion, chopped",
+            "5 large potatoes (Yukon Gold or equivalent), peeled and cut into 1/4 inch (about 6 mm) cubes",
+            "1 large carrot, coarsely shredded",
+            "900 g cooked corned beef, cubed",
+            "2 Tbsp chopped fresh parsley",
+            "1/2 tsp ground black pepper, or to taste",
+            "1/4 tsp dried thyme leaves",
+            "1 pinch salt, to taste"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Gather all ingredients."
+        },
+        {
+          "text": "Melt butter with olive oil in a large skillet over medium heat. Cook and stir onion until lightly browned, about 8 minutes."
+        },
+        {
+          "text": "Stir in potatoes and carrot; cook, stirring occasionally, until tender, about 15 minutes."
+        },
+        {
+          "text": "Stir in corned beef, parsley, pepper, thyme and salt. Cook, stirring often, until hash is crisp and browned, 10 to 15 more minutes."
+        },
+        {
+          "text": "Serve with fried egg (optional)."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
       "id": "beef-bourguignon-slow-cooker",
       "title": "Beef Bourguignon (Slow Cooker)",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": null,
       "yield": null,
       "time": null,
@@ -2725,7 +3381,7 @@
       "id": "pulled-pork-with-bbq-sauce-slow-cooker",
       "title": "Pulled Pork with BBQ Sauce (Slow Cooker)",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": "Recipe from RecipeTin Eats",
       "yield": null,
       "time": null,
@@ -2808,10 +3464,185 @@
       "needsCheck": false
     },
     {
+      "id": "slow-cooker-honey-garlic-chicken-dump-bag-option",
+      "title": "Slow Cooker Honey Garlic Chicken (Dump Bag Option)",
+      "part": "Savoury Mains",
+      "group": "Slow Cooker, Braises & Roasts",
+      "source": "Recipe from TamingTwins.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "1 kg boneless, skinless chicken thighs",
+            "4 cloves garlic, peeled and crushed",
+            "2 tsp fresh ginger",
+            "8 Tbsp dark soy sauce",
+            "2 Tbsp oyster sauce",
+            "4 Tbsp honey",
+            "4 Tbsp tomato ketchup",
+            "1/2 tsp chilli flakes (optional)"
+          ]
+        },
+        {
+          "heading": "To add at end of cooking",
+          "items": [
+            "1 Tbsp cornflour"
+          ]
+        },
+        {
+          "heading": "To serve",
+          "items": [
+            "Rice, chopped spring onion, sesame seeds"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Put everything (except cornflour) into slow cooker and stir."
+        },
+        {
+          "text": "Cook with lid on for 4 hours on High or at least 6 hours on Low."
+        },
+        {
+          "text": "When chicken is tender and falling apart, scoop out a couple of tablespoons of the liquid and mix into the cornflour in a small bowl. Whisk until totally smooth and add back into the chicken mixture."
+        },
+        {
+          "text": "Gently shred the chicken with 2 forks and stir thoroughly so that the cornflour is distributed."
+        },
+        {
+          "text": "If sauce does not thicken, leave in slow cooker on High for about 10 minutes, stirring occasionally."
+        },
+        {
+          "text": "Serve sprinkled with chopped spring onion and sesame seeds."
+        }
+      ],
+      "notes": [
+        "Dump bag prep – put all raw ingredients into a storage bag and freeze. Defrost overnight (or more) in the fridge, then dump all into the slow cooker."
+      ],
+      "appliances": [
+        "slow cooker"
+      ],
+      "needsCheck": false
+    },
+    {
+      "id": "slow-cooked-herb-and-garlic-lamb-forequarter-chops",
+      "title": "Slow-Cooked Herb & Garlic Lamb Forequarter Chops",
+      "part": "Savoury Mains",
+      "group": "Slow Cooker, Braises & Roasts",
+      "source": "Recipe from ourcow.com.au",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "4 lamb forequarter chops",
+            "2 Tbsp olive oil",
+            "4 garlic cloves, minced",
+            "1 Tbsp fresh rosemary, finely chopped",
+            "1 Tbsp fresh thyme, finely chopped",
+            "1 Tbsp fresh parsley, finely chopped",
+            "1 onion, sliced",
+            "2 carrots, sliced",
+            "2 potatoes, diced",
+            "1 cup beef or lamb broth",
+            "1 cup red wine (optional)",
+            "Salt and pepper, to taste",
+            "1 lemon, juiced and zested"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Season chops with salt and pepper. In a large skillet, heat olive oil over medium-high heat. Sear the lamb chops on both sides until browned, about 2–3 minutes per side."
+        },
+        {
+          "text": "Place onion, carrots and potatoes at the bottom of the slow cooker."
+        },
+        {
+          "text": "In a small bowl, mix together the minced garlic, rosemary, thyme, parsley, lemon juice and lemon zest."
+        },
+        {
+          "text": "Place chops on top of the vegetables in the slow cooker. Pour the garlic and herb mixture over the lamb chops. Add the broth and wine."
+        },
+        {
+          "text": "Cover and cook on low for 6–8 hours or high for 3–4 hours, until the lamb is tender."
+        },
+        {
+          "text": "Serve lamb chops and vegetables, spooning over some cooking juices for added flavour."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "slow cooker"
+      ],
+      "needsCheck": false
+    },
+    {
+      "id": "french-onion-braised-beef",
+      "title": "French Onion Braised Beef",
+      "part": "Savoury Mains",
+      "group": "Slow Cooker, Braises & Roasts",
+      "source": "Recipe from Coles magazine",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "1 Tbsp olive oil",
+            "850 g beef chuck steak, cut into 5 cm pieces",
+            "1 brown onion, coarsely chopped",
+            "2 carrots, coarsely chopped",
+            "1/4 cup (70 g) tomato paste",
+            "2 cups (500 ml) beef liquid stock",
+            "40 g pkt French onion soup mix",
+            "1/4 bunch thyme sprigs",
+            "550 g potatoes, peeled and chopped",
+            "20 g salted butter",
+            "1/2 cup (125 ml) milk"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Heat oil in a large saucepan/Dutch oven pot over high heat."
+        },
+        {
+          "text": "Cook beef, in batches, for 5 minutes or until browned. Transfer to a large heatproof bowl."
+        },
+        {
+          "text": "Add onion and carrot to the pan. Cook, stirring, for 5 minutes or until golden."
+        },
+        {
+          "text": "Return beef to the pan with tomato paste. Cook, stirring, for 1 minute to combine."
+        },
+        {
+          "text": "Add stock, soup mix and 1 thyme sprig. Bring to the boil, then reduce heat to low. Cover and cook for 1 1/2 hours or until the beef is tender."
+        },
+        {
+          "text": "Meanwhile, make mashed potato: cook potato in boiling water and drain. Add butter and milk and mash."
+        },
+        {
+          "text": "Serve over mash, sprinkled with extra thyme leaves."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "oven"
+      ],
+      "needsCheck": false
+    },
+    {
       "id": "slow-cooker-lamb-shoulder",
       "title": "Slow Cooker Lamb Shoulder",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": "Recipe from Slow Cooker Club",
       "yield": null,
       "time": null,
@@ -2871,7 +3702,7 @@
       "id": "honey-soy-chicken-slow-cooker",
       "title": "Honey Soy Chicken (Slow Cooker)",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": "Recipe from theorganisedhousewife.com.au",
       "yield": null,
       "time": null,
@@ -2915,10 +3746,74 @@
       "needsCheck": false
     },
     {
+      "id": "baked-teriyaki-chicken-drumsticks",
+      "title": "Baked Teriyaki Chicken Drumsticks",
+      "part": "Savoury Mains",
+      "group": "Slow Cooker, Braises & Roasts",
+      "source": "Recipe from quickweeknightmeals.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "About 900 g chicken drumsticks",
+            "1/4 cup soy sauce",
+            "3 Tbsp brown sugar",
+            "2 Tbsp rice vinegar",
+            "1 tsp sesame oil",
+            "3 cloves garlic, minced",
+            "1 tsp sriracha (or to taste)",
+            "1/2 tsp ground ginger",
+            "1 Tbsp cornstarch",
+            "Sesame seeds and green onion, for serving"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Preheat oven to 218 °C. Spray oil in a baking dish."
+        },
+        {
+          "text": "Place drumsticks in a single layer on prepared pan."
+        },
+        {
+          "text": "In a small bowl, whisk together soy sauce, brown sugar, rice vinegar, sesame oil, sriracha and ground ginger. Pour over the drumsticks."
+        },
+        {
+          "text": "Bake 40 minutes, flipping halfway through, or until the chicken reaches an internal temperature of 74 °C."
+        },
+        {
+          "text": "Remove chicken from oven and turn broiler/grill on."
+        },
+        {
+          "text": "Pour the sauce from the pan into a small saucepan. Set over medium heat and bring to a simmer."
+        },
+        {
+          "text": "In a small bowl, whisk together cornstarch with 1 Tbsp of cold water."
+        },
+        {
+          "text": "Pour the cornstarch mixture into the sauce mixture and whisk to combine. The sauce will thicken quickly; remove it as soon as it thickens."
+        },
+        {
+          "text": "Brush the thickened sauce over the chicken and return to the oven. Watch closely – leave in for just a few minutes, until the sauce is glossy."
+        },
+        {
+          "text": "Sprinkle with sesame seeds and sliced green onions before serving."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "oven"
+      ],
+      "needsCheck": false
+    },
+    {
       "id": "silverside-on-stove",
       "title": "Silverside (On-Stove)",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": "Recipe based on australianbeef.com.au and cookingperfected.com",
       "yield": null,
       "time": null,
@@ -2963,7 +3858,7 @@
       "id": "juiciest-baked-pork-tenderloin",
       "title": "Juiciest Baked Pork Tenderloin",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": "Recipe from theendlessmeal.com",
       "yield": null,
       "time": null,
@@ -3018,7 +3913,7 @@
       "id": "juicy-stove-top-chicken-seasoning-rub",
       "title": "Juicy Stove Top Chicken – Seasoning Rub",
       "part": "Savoury Mains",
-      "group": "Slow Cooker & Roasts",
+      "group": "Slow Cooker, Braises & Roasts",
       "source": "Recipe from diethood.com",
       "yield": null,
       "time": null,
@@ -3154,7 +4049,7 @@
       "part": "Savoury Mains",
       "group": "Pies, Bakes & Savoury Slices",
       "source": "Recipe from taste.com.au",
-      "yield": "About 8 | Prep 1:15 | Cook approx. 2:35",
+      "yield": "Serves about 8 | Prep 1:15 | Cook approx. 2:35",
       "time": null,
       "introNotes": [],
       "ingredients": [
@@ -4418,6 +5313,44 @@
       "needsCheck": false
     },
     {
+      "id": "ghee-clarified-butter",
+      "title": "Ghee/Clarified Butter",
+      "part": "Sides, Sauces & Extras",
+      "group": "Sauces, Pickles & Condiments",
+      "source": "RecipeTin Eats",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "250 g unsalted butter, cut into 2.5 cm cubes"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "In a small/medium stainless steel saucepan, put butter in and let it melt over medium-low heat."
+        },
+        {
+          "text": "Leave to simmer for 10 minutes (it should start to foam at about 5 minutes, then clear at 7 minutes)."
+        },
+        {
+          "text": "Ghee is ready when the milk solids that settle on the base of the pan turn golden."
+        },
+        {
+          "text": "Strain through a mesh colander lined with a single sheet of paper towel."
+        },
+        {
+          "text": "Pour into a jar for storage. Keeps in the pantry for 3 months and the fridge for 1 year."
+        }
+      ],
+      "notes": [],
+      "appliances": [],
+      "needsCheck": false
+    },
+    {
       "id": "breadmaker-dough-recipes",
       "title": "Breadmaker Dough Recipes",
       "part": "Breads, Doughs & Breakfast",
@@ -5607,6 +6540,70 @@
       ],
       "notes": [],
       "appliances": [],
+      "needsCheck": false
+    },
+    {
+      "id": "healthy-homemade-granola-muesli",
+      "title": "Healthy Homemade Granola/Muesli",
+      "part": "Breads, Doughs & Breakfast",
+      "group": "Breakfast: Pancakes, Pikelets & Oats",
+      "source": "RecipeTin Eats",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": "Dry ingredients",
+          "items": [
+            "4 cups (360 g) rolled oats",
+            "1 cup coconut flakes",
+            "1 cup raw nuts (e.g. sliced almonds, pecans, sunflower seeds, pepitas)",
+            "1/2 cup dried fruit",
+            "1 tsp favourite spice (cinnamon, a little ginger and mixed spice)",
+            "1 pinch salt"
+          ]
+        },
+        {
+          "heading": "Wet ingredients",
+          "items": [
+            "1/3 cup sweetener (honey, maple syrup, brown sugar)",
+            "1/3 cup fat (coconut oil or melted butter)",
+            "1 1/2 tsp flavouring (vanilla essence)"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "section": "Loose granola",
+          "text": "Preheat oven to 150 °C."
+        },
+        {
+          "section": "Loose granola",
+          "text": "Combine dry ingredients except fruit (add brown sugar here if using)."
+        },
+        {
+          "section": "Loose granola",
+          "text": "Combine wet ingredients."
+        },
+        {
+          "section": "Loose granola",
+          "text": "Combine wet and dry, then taste and adjust (i.e. more sweet/fat)."
+        },
+        {
+          "section": "Loose granola",
+          "text": "Spread on baking tray and bake until golden, approx. 35–40 minutes, tossing 2–3 times."
+        },
+        {
+          "section": "Loose granola",
+          "text": "Stir through dried fruit. Cool. Store in an airtight container."
+        }
+      ],
+      "notes": [
+        "Can also add soy protein with the fruit."
+      ],
+      "appliances": [
+        "oven"
+      ],
       "needsCheck": false
     },
     {
@@ -7035,10 +8032,64 @@
       "needsCheck": false
     },
     {
+      "id": "no-bake-chocolate-and-date-weet-bix-slice",
+      "title": "No-Bake Chocolate & Date Weet-Bix Slice",
+      "part": "Baking & Desserts",
+      "group": "Slices & No-Bake Treats",
+      "source": "Recipe from mykidslickthebowl.com",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "5 Weet-Bix (75 g)",
+            "1 cup pitted dates",
+            "1/2 cup sunflower seeds (or any nuts/seeds)",
+            "1/2 cup desiccated coconut",
+            "4 Tbsp cocoa",
+            "2 Tbsp honey",
+            "2 Tbsp water",
+            "40 g dark chocolate, for top layer"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Soften dates by putting them in a microwave-safe bowl with a splash of water, covered, and microwave for a bit. Mix well with a fork."
+        },
+        {
+          "text": "Blitz sunflower seeds in a food processor. Do the same with the Weet-Bix."
+        },
+        {
+          "text": "Combine all ingredients (except dark chocolate) in a bowl and mix well."
+        },
+        {
+          "text": "Press mixture into a tin lined with baking paper."
+        },
+        {
+          "text": "Melt dark chocolate and spread on top."
+        },
+        {
+          "text": "Refrigerate for 2 hours."
+        },
+        {
+          "text": "Slice. Store in fridge."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "microwave",
+        "oven"
+      ],
+      "needsCheck": false
+    },
+    {
       "id": "pavlova",
       "title": "Pavlova",
       "part": "Baking & Desserts",
-      "group": "Desserts & Frozen Treats",
+      "group": "Desserts, Treats & Snacks",
       "source": null,
       "yield": null,
       "time": null,
@@ -7091,7 +8142,7 @@
       "id": "golden-syrup-pudding-microwave",
       "title": "Golden Syrup Pudding (Microwave)",
       "part": "Baking & Desserts",
-      "group": "Desserts & Frozen Treats",
+      "group": "Desserts, Treats & Snacks",
       "source": null,
       "yield": null,
       "time": null,
@@ -7133,7 +8184,7 @@
       "id": "chocolate-self-saucing-pudding-microwave",
       "title": "Chocolate Self-Saucing Pudding (Microwave)",
       "part": "Baking & Desserts",
-      "group": "Desserts & Frozen Treats",
+      "group": "Desserts, Treats & Snacks",
       "source": null,
       "yield": null,
       "time": null,
@@ -7187,7 +8238,7 @@
       "id": "homemade-ice-cream",
       "title": "Homemade Ice-Cream",
       "part": "Baking & Desserts",
-      "group": "Desserts & Frozen Treats",
+      "group": "Desserts, Treats & Snacks",
       "source": null,
       "yield": null,
       "time": null,
@@ -7228,7 +8279,7 @@
       "id": "ice-cream-sandwiches-condensed-milk-ice-cream",
       "title": "Ice Cream Sandwiches (Condensed Milk Ice Cream)",
       "part": "Baking & Desserts",
-      "group": "Desserts & Frozen Treats",
+      "group": "Desserts, Treats & Snacks",
       "source": "Recipe from bestrecipes.com.au",
       "yield": null,
       "time": null,
@@ -7266,7 +8317,7 @@
       "id": "apple-pie-filling",
       "title": "Apple Pie Filling",
       "part": "Baking & Desserts",
-      "group": "Desserts & Frozen Treats",
+      "group": "Desserts, Treats & Snacks",
       "source": "Recipe from RecipeTin Eats",
       "yield": null,
       "time": null,
@@ -7316,6 +8367,52 @@
         "oven"
       ],
       "needsCheck": false
+    },
+    {
+      "id": "homemade-movie-popcorn-butter-popcorn",
+      "title": "Homemade Movie Popcorn (Butter Popcorn)",
+      "part": "Baking & Desserts",
+      "group": "Desserts, Treats & Snacks",
+      "source": "RecipeTin Eats",
+      "yield": null,
+      "time": null,
+      "introNotes": [],
+      "ingredients": [
+        {
+          "heading": null,
+          "items": [
+            "3 Tbsp ghee",
+            "3/4 cup popcorn kernels",
+            "2–3 Tbsp extra ghee",
+            "1 tsp popcorn salt (salt ground with mortar and pestle)"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Place 3 Tbsp ghee in a large 10 L lightweight pot over medium heat."
+        },
+        {
+          "text": "Add kernels and shake quickly to spread across the base, then clamp lid on. The kernels will start popping after a minute or so."
+        },
+        {
+          "text": "Shake briefly once after 30 seconds. When popping stops, immediately pour popcorn into a large bowl."
+        },
+        {
+          "text": "Melt extra ghee in microwave. Pour over popcorn and sprinkle over salt. Shake and toss to disperse."
+        },
+        {
+          "text": "Store in an airtight container for 2–3 days."
+        }
+      ],
+      "notes": [],
+      "appliances": [
+        "microwave"
+      ],
+      "needsCheck": false,
+      "related": [
+        "ghee-clarified-butter"
+      ]
     },
     {
       "id": "chocolate-icing",

@@ -138,7 +138,7 @@
     section('Recipe data');
     await data.load('../recipes.json');
     const all = data.all().filter((r) => !r.custom);
-    check('135 recipes loaded', all.length, 135);
+    check('156 recipes loaded', all.length, 156);
     check('4 parts', data.parts().length, 4);
     const groups = data.allGroups().map((g) => g.group);
     check('every recipe is in a listed group', all.filter((r) => !groups.includes(r.group)).map((r) => r.id), []);

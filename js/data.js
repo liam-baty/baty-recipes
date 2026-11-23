@@ -37,15 +37,32 @@ export function bookRecipe(id) {
   return book.recipes.find((r) => r.id === id) || null;
 }
 
+// Groups the book has renamed. Recipes added or edited on a phone before the
+// rename still say the old name, so they're shown under the new one.
+const RENAMED = {
+  'Pasta, Risoni & Risotto': 'Pasta, Rice & Risotto',
+  'Mince Favourites': 'Mince & Skillet Favourites',
+  'Slow Cooker & Roasts': 'Slow Cooker, Braises & Roasts',
+  'Desserts & Frozen Treats': 'Desserts, Treats & Snacks'
+};
+
+/** If r's group is an old name, return r with the current group and part. */
+function currentGroup(r) {
+  const g = allGroups().find((x) => x.group === r.group);
+  if (g) return r;
+  const renamed = allGroups().find((x) => x.group === RENAMED[r.group]);
+  return renamed ? { ...r, group: renamed.group, part: renamed.part } : r;
+}
+
 export function all() {
   if (cache) return cache;
   const edits = store.get('edits');
   const custom = store.get('custom');
   const list = book.recipes.map((r) => {
     const e = edits[r.id];
-    return e ? { ...r, ...e, id: r.id, edited: true } : r;
+    return e ? currentGroup({ ...r, ...e, id: r.id, edited: true }) : r;
   });
-  for (const r of Object.values(custom)) list.push({ ...r, custom: true });
+  for (const r of Object.values(custom)) list.push(currentGroup({ ...r, custom: true }));
   // Pre-compute lower-case text for fast searching
   for (const r of list) {
     Object.defineProperty(r, '_hay', {
