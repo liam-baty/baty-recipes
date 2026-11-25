@@ -31,7 +31,7 @@ export function render(el, { id, isNew }) {
       ${r && !r.custom ? '<p class="muted small">Your changes are saved on this phone. The book version is kept, and you can go back to it any time.</p>' : ''}
       <label class="field">Title <input name="title" required value="${esc(r?.title)}"></label>
       <label class="field">Group
-        <select name="group">${data.parts().map((p) => `<optgroup label="${esc(p.name)}">${p.groups.map((g) =>
+        <select name="group" required>${r && !groups.some((g) => g.group === r.group) ? '<option value="" selected disabled>Choose a group</option>' : ''}${data.parts({ withOther: false }).map((p) => `<optgroup label="${esc(p.name)}">${p.groups.map((g) =>
           `<option ${g === r?.group ? 'selected' : ''}>${esc(g)}</option>`).join('')}</optgroup>`).join('')}</select>
       </label>
       <label class="field">Source <input name="source" value="${esc(r?.source)}" placeholder="Where it came from"></label>

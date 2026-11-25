@@ -23,9 +23,20 @@ export function meta() {
   return { title: book?.title, version: book?.version, generated: book?.generated, count: book?.recipes.length };
 }
 
-/** Parts and their groups, in book order. Your own recipes may add a "My recipes" group. */
-export function parts() {
+/**
+ * Parts and their groups, in book order (read from recipes.json).
+ * With withOther, a part also lists "Other recipes" when one of your own
+ * recipes names a group the book doesn't have any more.
+ */
+export function parts({ withOther = true } = {}) {
   const list = book.parts.map((p) => ({ name: p.name, groups: [...p.groups] }));
+  if (withOther) {
+    for (const r of all()) {
+      if (r.group !== OTHER_GROUP) continue;
+      const p = list.find((x) => x.name === r.part);
+      if (p && !p.groups.includes(OTHER_GROUP)) p.groups.push(OTHER_GROUP);
+    }
+  }
   return list;
 }
 
@@ -37,21 +48,21 @@ export function bookRecipe(id) {
   return book.recipes.find((r) => r.id === id) || null;
 }
 
-// Groups the book has renamed. Recipes added or edited on a phone before the
-// rename still say the old name, so they're shown under the new one.
-const RENAMED = {
-  'Pasta, Risoni & Risotto': 'Pasta, Rice & Risotto',
-  'Mince Favourites': 'Mince & Skillet Favourites',
-  'Slow Cooker & Roasts': 'Slow Cooker, Braises & Roasts',
-  'Desserts & Frozen Treats': 'Desserts, Treats & Snacks'
-};
+// Group names come only from recipes.json's "parts" list, and can change.
+// Recipes saved on a phone may name a group the book no longer has:
+// - an edited book recipe just uses the book's current group;
+// - your own recipe goes in an "Other recipes" group in its part, so it's never hidden.
+export const OTHER_GROUP = 'Other recipes';
 
-/** If r's group is an old name, return r with the current group and part. */
-function currentGroup(r) {
-  const g = allGroups().find((x) => x.group === r.group);
-  if (g) return r;
-  const renamed = allGroups().find((x) => x.group === RENAMED[r.group]);
-  return renamed ? { ...r, group: renamed.group, part: renamed.part } : r;
+function isBookGroup(group) {
+  return book.parts.some((p) => p.groups.includes(group));
+}
+
+function fixGroup(r, bookVersion) {
+  if (isBookGroup(r.group)) return r;
+  if (bookVersion) return { ...r, group: bookVersion.group, part: bookVersion.part };
+  const part = book.parts.find((p) => p.name === r.part) || book.parts[book.parts.length - 1];
+  return { ...r, group: OTHER_GROUP, part: part.name };
 }
 
 export function all() {
@@ -60,9 +71,9 @@ export function all() {
   const custom = store.get('custom');
   const list = book.recipes.map((r) => {
     const e = edits[r.id];
-    return e ? currentGroup({ ...r, ...e, id: r.id, edited: true }) : r;
+    return e ? fixGroup({ ...r, ...e, id: r.id, edited: true }, r) : r;
   });
-  for (const r of Object.values(custom)) list.push(currentGroup({ ...r, custom: true }));
+  for (const r of Object.values(custom)) list.push(fixGroup({ ...r, custom: true }));
   // Pre-compute lower-case text for fast searching
   for (const r of list) {
     Object.defineProperty(r, '_hay', {

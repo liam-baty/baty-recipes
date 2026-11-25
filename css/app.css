@@ -357,6 +357,9 @@ body[data-view="cook"] .timer-tray { bottom: calc(var(--safe-b) + 92px); }
 .day-list { list-style: none; margin: 0; padding: 0; }
 .plan-entry { display: flex; align-items: center; gap: 6px; border-top: 1px solid var(--border); min-height: 48px; }
 .plan-title { flex: 1; font-weight: 600; text-decoration: none; color: var(--text); padding: 8px 0; }
+.plan-own { background: none; border: 0; text-align: left; font: inherit; font-weight: 600; cursor: pointer; min-height: 44px; }
+.plan-own::after { content: " ✎"; color: var(--muted); font-weight: 400; font-size: .85em; }
+.pick-own .pick-item { color: var(--green); }
 .scale-btn { min-width: 44px; min-height: 36px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
 .label-btn { border: 0; border-radius: 999px; background: var(--purple-soft); color: var(--purple); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; min-height: 32px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.03em; }
 
