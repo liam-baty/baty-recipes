@@ -105,7 +105,7 @@ export function search(query, list = all()) {
       let s = 0;
       if (h.title.includes(w)) s += h.title.startsWith(w) || h.title.includes(' ' + w) ? 12 : 8;
       if (h.group.includes(w)) s += 4;
-      if (h.ingredients.includes(w)) s += 3;
+      if (ingredientMatch(h.ingredients, w)) s += 3;
       if (h.notes.includes(w) || mine.includes(w)) s += 1;
       if (!s) { ok = false; break; }
       score += s;
@@ -113,6 +113,32 @@ export function search(query, list = all()) {
     if (ok) results.push({ r, score });
   }
   return results.sort((a, b) => b.score - a.score).map((x) => x.r);
+}
+
+// ---------------------------------------------------------------------------
+// Matching a word in ingredient lines
+// ---------------------------------------------------------------------------
+
+// "minced", "sliced", "diced"… describe how something is cut, so "mince" shouldn't
+// find "minced garlic" or "garlic, minced". They still count before a meat
+// ("minced beef" is mince).
+const MEAT_NEXT = /^\s+(beef|lamb|pork|chicken|turkey|veal|meat|steak|kangaroo|venison|sausage)/;
+
+/**
+ * Does `term` (lower case, partial words fine) appear in `text` as an ingredient?
+ * `skipIfNext` (optional regex) rejects a match by what follows it,
+ * e.g. "chicken stock" doesn't count as chicken.
+ */
+export function ingredientMatch(text, term, skipIfNext = null) {
+  const re = new RegExp(`\\b${reEscape(term)}[a-z]*`, 'g');
+  for (const m of text.matchAll(re)) {
+    const word = m[0];
+    const rest = text.slice(m.index + word.length);
+    if (word !== term && word.endsWith('ed') && word !== 'seed' && !MEAT_NEXT.test(rest)) continue;
+    if (skipIfNext && skipIfNext.test(rest)) continue;
+    return true;
+  }
+  return false;
 }
 
 // ---------------------------------------------------------------------------
@@ -128,10 +154,7 @@ export function makeWith(terms) {
   const flavourOnly = /^\s*(stock|broth|powder|salt|cube|seasoning|bouillon|gravy|flavour|vinegar|wine|paper|flour|noodle|malt|bran)/;
   for (const r of all()) {
     const lines = r.ingredients.flatMap((g) => g.items).map(norm);
-    const used = clean.filter((t) => {
-      const re = new RegExp(`\\b${reEscape(t)}[a-z]*`, 'g');
-      return lines.some((l) => [...l.matchAll(re)].some((m) => !flavourOnly.test(l.slice(m.index + m[0].length))));
-    });
+    const used = clean.filter((t) => lines.some((l) => ingredientMatch(l, t, flavourOnly)));
     if (used.length) {
       const total = r.ingredients.reduce((n, g) => n + g.items.length, 0);
       res.push({ r, used, total });

@@ -174,6 +174,15 @@
     check('"chicken, rice" top result uses both', mk[0].used.length, 2);
     check('"chicken stock" alone doesn\'t count as chicken', data.makeWith(['chicken']).some((x) => x.r.id === 'garlic-butter-rice'), false);
     check('"rice vinegar" doesn\'t count as rice', data.makeWith(['rice']).some((x) => x.r.id === 'ginger-pickled-beets'), false);
+    check('"minced garlic" isn\'t mince', data.ingredientMatch('2 tsp minced garlic', 'mince'), false);
+    check('"garlic, minced" isn\'t mince', data.ingredientMatch('3 cloves garlic, minced', 'mince'), false);
+    check('"minced beef" is mince', data.ingredientMatch('500 g minced beef', 'mince'), true);
+    check('"beef mince" is mince', data.ingredientMatch('500 g beef mince', 'mince'), true);
+    check('typing "minced" still finds minced', data.ingredientMatch('2 tsp minced garlic', 'minced'), true);
+    check('"sesame seeds" still found by "seed"', data.ingredientMatch('1 tbsp sesame seeds', 'seed'), true);
+    const mince = data.makeWith(['mince']).map((x) => x.r);
+    check('make with mince: every result has real mince', mince.filter((r) => !r.ingredients.flatMap((g) => g.items).some((l) => /mince(?!d)|minced (beef|lamb|pork|chicken|meat)/i.test(l))).map((r) => r.id), []);
+    check('search "mince" skips garlic-only recipes', data.search('mince').filter((r) => !/mince/i.test(r.title + r.group) && !r.ingredients.flatMap((g) => g.items).some((l) => /mince(?!d)|minced (beef|lamb|pork|chicken|meat)/i.test(l))).map((r) => r.id), []);
     out.insertAdjacentHTML('beforeend', `<p class="muted">Top "chicken + rice" matches: ${mk.slice(0, 5).map((x) => x.r.title).join(', ')}</p>`);
     check('"see recipe" becomes a link', data.linkify('When set, ice with chocolate icing (see recipe).', data.get('hedgehog-slice')).includes('#/recipe/chocolate-icing'), true);
 
